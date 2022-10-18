@@ -30,49 +30,45 @@ export const InfoCard = (props)=>{
     })
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=>{
-                props.handleClick()
-            }} style={{height: 30, width: 30, alignSelf: 'flex-end'}}>
-                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={require('../images/setting.png')}/>
-            </TouchableOpacity>
+
             <View style={{height: 80, width: '100%'}}>
-                <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'white', marginBottom: 5}}>
+                <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 5}}>
                     Organisation:
                 </Text>
-                <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: 'white', marginBottom: 20}}>
+                <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
                     L’Université Mohammed VI Polytechnique
                 </Text>
 
             </View>
-            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '300', color: 'white', marginBottom: 20, position: 'absolute', top: 150, left: 105}}>
+            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '300', color: 'black', marginBottom: 20, position: 'absolute', top: 150, left: 105}}>
                 Total Balance:
             </Text>
-            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '500', color: 'white', marginBottom: 20, position: 'absolute', top: 190, left: 150}}>
+            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '500', color: '#24A19C', marginBottom: 20, position: 'absolute', top: 190, left: 150}}>
                 1000
             </Text>
 
-            <View style={{width: '100%', height: 65, flexDirection: 'row', marginTop: 15, position: 'absolute', bottom: 20}}>
-                <View style={{width: '33%', height: '100%',borderRightWidth: 1, borderColor: 'white', alignItems: 'center',}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+            <View style={{width: '100%', height: 65, flexDirection: 'row', marginTop: 15, position: 'absolute', bottom: 50}}>
+                <View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: '#24A19C', alignItems: 'center',}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                         Phygital
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
                         500
                     </Text>
                 </View>
-                <View style={{width: '34%', height: '100%', borderColor: 'white', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+                <View style={{width: '34%', height: '100%', borderColor: 'black', alignItems: 'center'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                         Digital
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
                         250
                     </Text>
                 </View>
-                <View style={{width: '33%', height: '100%',borderLeftWidth: 1, borderColor: 'white', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+                <View style={{width: '33%', height: '100%',borderLeftWidth: 2, borderColor: '#24A19C', alignItems: 'center'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                         Badge
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
                         250
                     </Text>
                 </View>
@@ -90,21 +86,21 @@ export const CredCard = (props)=>{
 
     const styles = StyleSheet.create({
         container: {
-            width: '90%',
-            height: 85,
+            width: 110,
+            height: 80,
             alignSelf: 'center',
             borderRadius: 20, 
             marginBottom: 10,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#3C4048',
+            backgroundColor: '#24A19C',
             elevation: 10
         },
         title:{
-            fontSize: 20,
+            fontSize: 13,
             color: '#EAEAEA',
             fontWeight: '400',
-            letterSpacing: 5,
+            letterSpacing: 4,
             
         }
     })
@@ -133,5 +129,39 @@ export const SettingsSlide = (props)=>{
             
             
         </Animated.View>
+    )
+}
+
+
+export const HomeScreenTopBar = (props)=>{
+
+    const styles = StyleSheet.create({
+
+        container: {
+            width: '100%',
+            height: 80,
+            backgroundColor: '#24A19C',
+            justifyContent: 'flex-end',
+        },
+        image: {
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            marginLeft: 10,
+            marginBottom: 10
+        }
+    })
+
+    return (
+        <View style={styles.container}>
+            <View style={{width: 30, height: 30, position: 'absolute', right: 10, bottom: 10}}>
+            <TouchableOpacity onPress={()=>{
+                props.handleClick()
+            }} style={{height: 30, width: 30}}>
+                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={require('../images/setting.png')}/>
+            </TouchableOpacity>
+            </View>
+            <Image style={styles.image} source={require('../images/noImage.png')}/>
+        </View>
     )
 }

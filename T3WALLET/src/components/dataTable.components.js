@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import {StyleSheet, View, Text, Animated, TouchableOpacity,Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -15,7 +16,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 20,
     alignSelf: 'center',
-    padding: 10
+    padding: 10,
+    borderColor: '#24A19C',
+    borderWidth: 2
     },
     title: {
     fontSize: 15,
@@ -75,7 +78,7 @@ export const Card = ({ title, navTab, link , handleClick}) => {
                 fadeIn()
                 setHeight(100)
             }
-        }} style={{...styles.item, height: fadeAnim, backgroundColor: 'rgba(255,255,255,0.5)'}}>
+        }} style={{...styles.item, height: fadeAnim, backgroundColor: 'rgba(36,161,156,0.1)'}}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.title}>credentiel link: {link}</Text>
             {Height == 100 &&
@@ -96,7 +99,26 @@ export const Card = ({ title, navTab, link , handleClick}) => {
 
 
 
-export const Item = ({ title,fadeAnim, navTab, link, handleClick})=>{
+export const PhygitalItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
+
+    console.log(navTab);
+    
+
+    return (
+        <Card handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+    )
+}
+export const DigitalItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
+
+    console.log(navTab);
+    
+
+    return (
+        <Card handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+    )
+}
+
+export const BadgeItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
 
     console.log(navTab);
     
@@ -122,4 +144,32 @@ export const ImageView = (props)=>{
         </View>
     </View>
   )
+}
+
+
+export const DataTableTopBar = ()=>{
+
+    const navigation = useNavigation()
+
+    const styles = StyleSheet.create({
+      container: {
+        width: '100%',
+        height: 80,
+        backgroundColor: '#24A19C',
+        justifyContent: 'flex-end',
+    },
+    })
+
+    return (
+      <View style={styles.container}>
+          <View style={{width: 40, height: 40, justifyContent: 'center', marginTop: 20}}>
+              <TouchableOpacity onPress={()=>{
+                console.log('heeeere');
+                navigation.navigate('home')
+              }} style={{flex: 1, flexDirection: 'row'}}>
+                  <Image source={require('../images/back.png')} style={{width: 30, height: 30, marginLeft: 10}}/>
+              </TouchableOpacity>
+          </View>
+      </View>
+    )
 }

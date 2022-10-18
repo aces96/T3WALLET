@@ -20,6 +20,7 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  console.disableYellowBox = true;
 
   return (
       <Navigation/>

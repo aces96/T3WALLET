@@ -1,23 +1,27 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { View, StyleSheet , Text, Animated, ScrollView, Image} from 'react-native';
-import { CredCard, InfoCard, SettingsSlide } from '../components/homeScreen.components';
+import { CredCard, InfoCard, SettingsSlide, HomeScreenTopBar } from '../components/homeScreen.components';
+import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 
 
 
 export const Home = ()=>{
 
+    SystemNavigationBar.navigationHide();
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
     const [FadeIn, setFadeIn] = useState(false)
 
     const styles = StyleSheet.create({
         container: {
-            flex: 1,
-            backgroundColor: '#3C4048',
+            height: '100%',
+            width: '100%',
+            backgroundColor: '#FFFFFF',
         }
     })
 
-    const fadeAnim = useRef(new Animated.Value(0)).current;
 
 
     const fadeIn = ()=>{
@@ -37,7 +41,7 @@ export const Home = ()=>{
 
     return (
         <ScrollView  style={styles.container}>
-            <InfoCard handleClick={()=>{
+            <HomeScreenTopBar handleClick={()=>{
                 if(!FadeIn){
                     fadeIn()
                     setFadeIn(true)
@@ -45,15 +49,14 @@ export const Home = ()=>{
                     fadeOut()
                     setFadeIn(false)
                 }
-            }}/>
-                <View style={{height: 350, width: '95%', backgroundColor: '#EAEAEA', alignSelf: 'center', borderTopLeftRadius: 30, borderTopRightRadius: 40}}>
-                <Text style={{fontSize: 20, color: 'black', textAlign: 'left', marginLeft: 20, marginTop: 10, marginBottom: 20, fontWeight: '700'}}>
-                Credentiels:
-                </Text>
+            }} />
+            <InfoCard />
+                <View style={{height: 100,width: '90%', flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'center'}}>
                 <CredCard title={'PHYGITAL'} />
                 <CredCard title={'DIGITAL'}/>
                 <CredCard title={'BADGE'}/>
                 </View>
+
             <SettingsSlide fadeAnim={fadeAnim}/>
         </ScrollView>
     )

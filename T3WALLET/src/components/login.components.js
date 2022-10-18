@@ -3,6 +3,7 @@ import * as React from 'react';
 import { View , StyleSheet, Image} from 'react-native';
 
 
+
 export const Logo = ()=>{
     const styles= StyleSheet.create({
         container: {
@@ -11,9 +12,7 @@ export const Logo = ()=>{
             transform: [{rotate: '40deg'}],
             alignSelf: 'center',
             marginTop: 40
-
         },
-
     })
 
 
