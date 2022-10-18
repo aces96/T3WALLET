@@ -73,14 +73,13 @@ export const InfoCard = (props)=>{
                     </Text>
                 </View>
             </View>
-
             {/* <TouchableOpacity onPress={()=>props.handleClick()} style={styles.button}>
                 <Text style={{color: 'black', fontSize: 15, fontWeight: '600'}}>Demande</Text>
             </TouchableOpacity> */}
-
         </View>
     )
 }
+
 
 export const CredCard = (props)=>{
 
