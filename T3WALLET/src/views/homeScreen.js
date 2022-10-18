@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { useRef } from 'react';
-import { View, StyleSheet , Text, Animated, Dimensions} from 'react-native';
-import { CredCard, InfoCard, SlideAppView } from '../components/homeScreen.components';
+import { useRef, useState } from 'react';
+import { View, StyleSheet , Text, Animated, ScrollView, Image} from 'react-native';
+import { CredCard, InfoCard, SettingsSlide } from '../components/homeScreen.components';
 
 
 
 
 export const Home = ()=>{
 
+    const [FadeIn, setFadeIn] = useState(false)
+
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            backgroundColor: 'white',
+            backgroundColor: '#3C4048',
         }
     })
 
@@ -20,7 +22,7 @@ export const Home = ()=>{
 
     const fadeIn = ()=>{
         Animated.timing(fadeAnim, {
-            toValue: 800,
+            toValue: 540,
             duration: 400,
             useNativeDriver: false
         }).start()
@@ -28,20 +30,31 @@ export const Home = ()=>{
     const fadeOut = ()=>{
         Animated.timing(fadeAnim, {
             toValue: 0,
-            duration: 3000
+            duration: 400,
+            useNativeDriver: false
         }).start();
     }
 
     return (
-        <View style={styles.container}>
-            <InfoCard handleClick={fadeIn}/>
-            <Text style={{fontSize: 20, color: 'black', textAlign: 'left', marginLeft: 10, marginTop: 10, marginBottom: 20, fontWeight: '600'}}>
+        <ScrollView  style={styles.container}>
+            <InfoCard handleClick={()=>{
+                if(!FadeIn){
+                    fadeIn()
+                    setFadeIn(true)
+                }else if(FadeIn){
+                    fadeOut()
+                    setFadeIn(false)
+                }
+            }}/>
+                <View style={{height: 350, width: '95%', backgroundColor: '#EAEAEA', alignSelf: 'center', borderTopLeftRadius: 30, borderTopRightRadius: 40}}>
+                <Text style={{fontSize: 20, color: 'black', textAlign: 'left', marginLeft: 20, marginTop: 10, marginBottom: 20, fontWeight: '700'}}>
                 Credentiels:
-            </Text>
-            <CredCard title={'PHYGITAL'} />
-            <CredCard title={'DIGITAL'}/>
-            <CredCard title={'BADGE'}/>
-            <SlideAppView fadeAnim={fadeAnim}/>
-        </View>
+                </Text>
+                <CredCard title={'PHYGITAL'} />
+                <CredCard title={'DIGITAL'}/>
+                <CredCard title={'BADGE'}/>
+                </View>
+            <SettingsSlide fadeAnim={fadeAnim}/>
+        </ScrollView>
     )
 }
