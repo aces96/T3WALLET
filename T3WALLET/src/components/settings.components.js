@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 
 
@@ -8,34 +9,59 @@ import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'reac
 
 export const EditImageSection = ()=>{
 
+    const [image,setImage] = useState('')
+
 
     const styles = StyleSheet.create({
         container: {
             height: 200,
             width: '100%',
-            backgroundColor: '#EAEAEA'
+            backgroundColor: 'white'
         },
-        image: {
+        imageView: {
             width: 120,
             height: 120,
             borderRadius: 60,
             alignSelf: 'center',
+            borderWidth: 2,
+            borderColor: 'rgba(36,161,156,0.7)',
+
+        },
+        image: {
+            width: '100%',
+            height: '100%',
+            borderRadius: 60,
+            alignSelf: 'center',
+            borderWidth: 1,
+            resizeMode: 'contain'
         },
         editImageText: {
             fontSize: 20,
             fontWeight: '500',
             textDecorationLine: 'underline' ,
-            color: 'rgba(0,128,255, 0.4)' ,
+            color: 'rgba(36,161,156,0.6)' ,
             position: 'absolute' ,
             top: 140 ,
             left: 130 ,
         }
     })
 
+    handleClick  = async ( )=>{
+        const options = {
+            quality: 0.5,
+            includeBase64: true
+        }
+        const image = await launchImageLibrary(options)
+        setImage(image.assets[0].uri)
+        console.log(image.assets[0].uri)
+    }
+
     return (
         <View style={styles.container}>
-            <Image  source={require('../images/noImage.png')} style={styles.image}/>
-            <Text style={styles.editImageText}>
+            <View style={styles.imageView}>  
+                <Image  source={image.length > 1 ? {uri: image} : require('../images/noImage.png')} style={styles.image}/>
+            </View>
+            <Text onPress={()=>handleClick()} style={styles.editImageText}>
                 Upload image
             </Text>
         </View>
@@ -50,12 +76,10 @@ export const SettingsInputs = ()=>{
         container: {
             width: '100%',
             height: 400,
-            backgroundColor: '#EAEAEA'
         },
         inputView: {
             height: 110,
             width: '100%',
-            backgroundColor: 'transparent',
 
         },
         inputLabel: {
@@ -75,8 +99,8 @@ export const SettingsInputs = ()=>{
             paddingLeft: 10,
             color: 'rgba(0,0,0,0.8)',
             borderRadius: 15,
-            backgroundColor: 'rgba(0,0,0,0.2)',
-            borderColor: 'white'
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            borderColor: 'rgba(36,161,156,0.4)'
         }
     })
 
@@ -106,7 +130,7 @@ const AddBalance = ()=>{
         container: {
             width: '100%',
             height: 79,
-            marginTop: 5
+            marginTop: 5,
         },
         balancetitle: {
             fontSize: 15,

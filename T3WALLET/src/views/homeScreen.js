@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import { View, StyleSheet , Text, Animated, ScrollView, StatusBar} from 'react-native';
+import { View, StyleSheet , Text, Animated, StatusBar} from 'react-native';
 import { CredCard, InfoCard, SettingsSlide, HomeScreenTopBar } from '../components/homeScreen.components';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 
@@ -19,7 +19,8 @@ export const Home = ()=>{
             height: '100%',
             width: '100%',
             backgroundColor: '#FFFFFF',
-        }
+        },
+
     })
 
 
@@ -40,9 +41,9 @@ export const Home = ()=>{
     }
 
     return (
-        <ScrollView  style={styles.container}>
+        <View  style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
-            <HomeScreenTopBar handleClick={()=>{
+            <HomeScreenTopBar FadeIn={FadeIn} handleClick={()=>{
                 if(!FadeIn){
                     fadeIn()
                     setFadeIn(true)
@@ -59,6 +60,6 @@ export const Home = ()=>{
                 </View>
 
             <SettingsSlide fadeAnim={fadeAnim}/>
-        </ScrollView>
+        </View>
     )
 }

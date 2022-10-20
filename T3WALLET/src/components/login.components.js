@@ -21,7 +21,6 @@ export const Logo = ()=>{
     return (
         <View style={styles.container}>
             <T3Logo width={200} height={200}/>
-
         </View>
     )
 }
@@ -36,7 +35,7 @@ export const LoginInput = (props)=>{
             borderRadius:  15,
             borderColor:  '#24A19C',
             borderWidth : 2,
-            backgroundColor: 'rgba(0,0,0,0.1)',
+            backgroundColor: 'rgba(0,0,0,0.05)',
             alignSelf: 'center',
             paddingLeft: 15,
             color: 'black',

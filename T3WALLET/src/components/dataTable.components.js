@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import {StyleSheet, View, Text, Animated, TouchableOpacity,Image } from 'react-native'
+import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 
 
@@ -9,25 +10,27 @@ const styles = StyleSheet.create({
     container: {
     flex: 1,
     marginTop:  0
-
     },
     item: {
     width: '90%',
     marginBottom: 10,
-    borderRadius: 20,
     alignSelf: 'center',
     padding: 10,
     borderColor: '#24A19C',
-    borderWidth: 2
+    borderWidth: 2,
+    borderRadius: 15
+
     },
     title: {
     fontSize: 15,
+    fontWeight: '500',
     color: 'black'
     },
     diplomeImage: {
       width: "100%",
       height: '100%'
     },
+
     imageView: {
       width: '100%',
       height: '100%',
@@ -36,13 +39,12 @@ const styles = StyleSheet.create({
       backgroundColor: 'rgba(0,0,0,0.6)',
       position: 'absolute',
       zIndex: 10
-    }
-
-
+    },
+    
 });
 
 
-export const Card = ({ title, navTab, link , handleClick}) => {
+export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
     const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
     const fadeAnim = useRef(new Animated.Value(100)).current;
 
@@ -53,7 +55,6 @@ export const Card = ({ title, navTab, link , handleClick}) => {
 
     
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 300,
       duration: 300
@@ -61,7 +62,6 @@ export const Card = ({ title, navTab, link , handleClick}) => {
   };
 
   const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(fadeAnim, {
       toValue: 100,
       duration: 300
@@ -89,9 +89,12 @@ export const Card = ({ title, navTab, link , handleClick}) => {
               </TouchableOpacity>
             }
 
-            <TouchableOpacity style={{flex: 1, position: 'absolute', bottom: 10, right: 20}}>
-              <Image style={{height: 20, width: 20}} source={require('../images/edit.png')}/>
+            <TouchableOpacity onPress={()=> {
+              handleEdit()
+            }} style={{flex: 1, position: 'absolute', bottom: 10, right: 20}}>
+              <Image style={{height: 25, width: 25}} source={require('../images/edit.png')}/>
             </TouchableOpacity>
+
         </AnimatedTouchable>
     )
 }
@@ -99,32 +102,32 @@ export const Card = ({ title, navTab, link , handleClick}) => {
 
 
 
-export const PhygitalItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
+export const PhygitalItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
-export const DigitalItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
+export const DigitalItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
 
-export const BadgeItem = ({ title,fadeAnim, navTab, link, handleClick})=>{
+export  const BadgeItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
 
@@ -136,12 +139,12 @@ export const ImageView = (props)=>{
     <View style={styles.imageView}>
         <TouchableOpacity onPress={()=>{
           props.handleCancel()
-        }} style={{flex: 1, position: 'absolute', right: 20, top: 10}}>
+        }} style={{flex: 1, position: 'absolute', right: 20, top: 35, marginBottom: 10, zIndex: 100}}>
           <Image style={{height: 35 , width: 35}} source={require('../images/cancel.png')}/>
         </TouchableOpacity>
-        <View style={{width: '100%', height: 300}}>
-          <Image style={{width: '100%', height: '100%', resizeMode: 'cover'}}  source={require('../images/diplome.png')}/>
-        </View>
+        <ReactNativeZoomableView pinchToZoomInSensitivity={5}	 contentWidth={Dimensions.get('window').get} contentHeight={150} maxZoom={2}>
+          <Image style={{width: Dimensions.get('window').width, height: 300, resizeMode: 'contain'}}  source={require('../images/diplome.png')}/>
+        </ReactNativeZoomableView>
     </View>
   )
 }
@@ -173,3 +176,12 @@ export const DataTableTopBar = ()=>{
       </View>
     )
 }
+
+
+
+
+// export const DataTableBottomSlide = ({fadeAnim})=>{
+//   return (
+
+//   )
+// }

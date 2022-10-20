@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useRef } from 'react';
 import { View , StyleSheet, Text, TouchableOpacity, Animated, Image} from 'react-native';
 import { EditImageSection, SettingsInputs } from './settings.components';
+import { BlurView } from "@react-native-community/blur";
+
 
 
 
@@ -26,6 +28,14 @@ export const InfoCard = (props)=>{
             marginTop: 25,
             justifyContent: 'center',
             alignItems: 'center'
+        },
+        absolute: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            borderRadius: 20
         }
     })
     return (
@@ -40,12 +50,22 @@ export const InfoCard = (props)=>{
                 </Text>
 
             </View>
-            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '300', color: 'black', marginBottom: 20, position: 'absolute', top: 150, left: 105}}>
+
+
+            <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 40, borderRadius: 15, overflow: 'hidden'}}>
+                <BlurView
+                style={styles.absolute}
+                blurType="light"
+                blurAmount={15}
+                reducedTransparencyFallbackColor= '#24A19C'
+                />
+            <Text style={{fontSize: 22, fontWeight: '300', color: 'black'}}>
                 Total Balance:
             </Text>
-            <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 22, fontWeight: '500', color: '#24A19C', marginBottom: 20, position: 'absolute', top: 190, left: 150}}>
+            <Text style={{fontSize: 22, fontWeight: '500', color: '#24A19C'}}>
                 1000
             </Text>
+            </View>
 
             <View style={{width: '100%', height: 65, flexDirection: 'row', marginTop: 15, position: 'absolute', bottom: 50}}>
                 <View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: '#24A19C', alignItems: 'center',}}>
@@ -119,7 +139,7 @@ export const SettingsSlide = (props)=>{
 
 
     return (
-        <Animated.View style={{height: props.fadeAnim, width: '100%', position: 'absolute', bottom: 0, borderTopLeftRadius: 50, borderTopRightRadius: 50, backgroundColor: '#EAEAEA'}}>
+        <Animated.View style={{height: props.fadeAnim, width: '100%', position: 'absolute', bottom: 0, borderTopLeftRadius: 50, borderTopRightRadius: 50, backgroundColor: 'white', borderColor: 'rgba(36,161,156,0.4)', borderWidth: 2}}>
             <Text style={{fontSize: 24, fontWeight: '700', textAlign: 'center', color: 'black', marginBottom: 20, marginTop: 10}}>
                 Settings
             </Text>
@@ -157,7 +177,8 @@ export const HomeScreenTopBar = (props)=>{
             <TouchableOpacity onPress={()=>{
                 props.handleClick()
             }} style={{height: 30, width: 30}}>
-                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={require('../images/setting.png')}/>
+
+                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={props.FadeIn ? require('../images/cancel3.png') : require('../images/setting.png')}/>
             </TouchableOpacity>
             </View>
             <Image style={styles.image} source={require('../images/noImage.png')}/>

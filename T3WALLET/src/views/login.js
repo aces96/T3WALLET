@@ -2,13 +2,17 @@ import * as React from 'react';
 import { useState, useCallback} from 'react'
 import { LoginInput } from '../components/login.components';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, StyleSheet, Text, TouchableOpacity, Switch , Image, ToastAndroid} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Switch , Image, ToastAndroid, StatusBar} from 'react-native';
 import { Logo } from '../components/login.components';
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
 import {useNavigation} from '@react-navigation/native';
+import SystemNavigationBar from 'react-native-system-navigation-bar';
+
 
 
 export const Login = ()=>{
+
+    SystemNavigationBar.navigationHide()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -44,7 +48,7 @@ export const Login = ()=>{
             width: 65,
             height: 65,
             alignSelf: 'center',
-            marginTop: 40
+            marginTop: 70
         }
     })
 
@@ -73,6 +77,7 @@ export const Login = ()=>{
     )
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor={'transparent'}/>
             <Logo />
 
             <Text style={{fontSize: 30, color: 'black', textAlign: 'center', marginBottom: 60, fontWeight: '600'}}>
