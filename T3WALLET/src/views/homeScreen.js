@@ -53,10 +53,17 @@ export const Home = ()=>{
                 }
             }} />
             <InfoCard />
-                <View style={{height: 100,width: '90%', flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'center'}}>
-                <CredCard title={'PHYGITAL'} />
-                <CredCard title={'DIGITAL'}/>
-                <CredCard title={'BADGE'}/>
+                <View style={{height: 200,width: '90%', justifyContent: 'space-between', alignSelf: 'center'}}>
+                    <View style={{height: '40%', width: '100%', flexDirection: 'row', alignSelf: 'center', justifyContent: 'space-around'}}>
+                        <CredCard title={'PHYGITAL'} />
+                        <CredCard title={'DIGITAL'}/>
+                    </View>
+
+                    <View style={{height: '40%', width: '100%', flexDirection: 'row', alignSelf: 'center', justifyContent: 'space-around'}}>
+                        <CredCard title={'BADGE'} />
+                        <CredCard title={'PROFIL'}/>
+                    </View>
+
                 </View>
 
             <SettingsSlide fadeAnim={fadeAnim}/>

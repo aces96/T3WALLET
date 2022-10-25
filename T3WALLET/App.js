@@ -4,8 +4,13 @@ import {
   SafeAreaView,
   StatusBar,
   useColorScheme,
+  LogBox,
 } from 'react-native';
 import { Navigation } from './src/navigation/navigation';
+import { useEffect } from 'react';
+import { Provider } from 'react-redux'
+import store from './src/redux/store';
+
 
 import {
   Colors,
@@ -17,13 +22,17 @@ import {
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  useEffect(()=>{
+    LogBox.ignoreLogs(['Warning: ...']);
+  },[])
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  console.disableYellowBox = true;
-
   return (
-      <Navigation/>
+    <Provider store={store}>
+        <Navigation/>
+    </Provider>
   );
 };
 

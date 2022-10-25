@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+import QRCode from 'react-native-qrcode-svg';
 
 
 
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     title: {
     fontSize: 15,
     fontWeight: '500',
-    color: 'black'
+    color: 'black',
     },
     diplomeImage: {
       width: "100%",
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 });
 
 
-export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
+export const Card = ({key, title, navTab, link , handleClick, handleEdit}) => {
     const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
     const fadeAnim = useRef(new Animated.Value(100)).current;
 
@@ -56,7 +57,7 @@ export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
     
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
-      toValue: 300,
+      toValue: 350,
       duration: 300
     }).start();
   };
@@ -70,7 +71,7 @@ export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
 
 
     return (
-        <AnimatedTouchable onPress={()=>{
+        <AnimatedTouchable key={Math.random() * 100} onPress={()=>{
             if(Height == 100){
                 fadeOut()
                 setHeight(50)
@@ -79,8 +80,11 @@ export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
                 setHeight(100)
             }
         }} style={{...styles.item, height: fadeAnim, backgroundColor: 'rgba(36,161,156,0.1)'}}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.title}>credentiel link: {link}</Text>
+            <Text style={{...styles.title, fontFamily: 'Oswald-Medium'}}>{title}</Text>
+            <View style={{height: 45, flexDirection: 'row'}}>
+                <Text style={{...styles.title, fontFamily: 'Oswald-Regular'}}>credentiel link:</Text>
+                <Text onPress={()=>Linking.openURL(`${link}`)} style={{...styles.title, marginLeft: 15, color: '#24A19C', textDecorationLine: 'underline', fontFamily: 'Oswald-Regular'}}>Open credentiel</Text>
+            </View>
             {Height == 100 &&
               <TouchableOpacity onPress={()=>{
                 handleClick()
@@ -90,7 +94,8 @@ export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
             }
 
             <TouchableOpacity onPress={()=> {
-              handleEdit()
+              const image = require('../images/edit.png')
+              handleEdit(title, link, image)
             }} style={{flex: 1, position: 'absolute', bottom: 10, right: 20}}>
               <Image style={{height: 25, width: 25}} source={require('../images/edit.png')}/>
             </TouchableOpacity>
@@ -102,32 +107,32 @@ export const Card = ({ title, navTab, link , handleClick, handleEdit}) => {
 
 
 
-export const PhygitalItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
+export const PhygitalItem = ({ key, title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card key={key} handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
-export const DigitalItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
+export const DigitalItem = ({key,  title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card key={key} handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
 
-export  const BadgeItem = ({ title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
+export  const BadgeItem = ({key, title,fadeAnim, navTab, link, handleClick, handleEdit})=>{
 
     console.log(navTab);
     
 
     return (
-        <Card handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
+        <Card key={key} handleEdit={handleEdit} handleClick={handleClick} link={link} navTab={navTab} fadeAnim={fadeAnim} title={title}/>
     )
 }
 
@@ -178,6 +183,36 @@ export const DataTableTopBar = ()=>{
 }
 
 
+
+
+export const QrCodePreview = (props)=>{
+
+    const link = 'https://www.google.com/'
+
+    const styles = StyleSheet.create({
+      container: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        position: 'absolute',
+        zIndex: 10
+      },
+    })
+    return (
+      <View style={styles.container}>
+
+        <TouchableOpacity onPress={()=>{
+          props.handleCancel()
+        }} style={{flex: 1, position: 'absolute', right: 20, top: 35, marginBottom: 10, zIndex: 100}}>
+          <Image style={{height: 35 , width: 35}} source={require('../images/cancel.png')}/>
+        </TouchableOpacity>
+
+        <QRCode size={300} value={link}/>
+      </View>
+    )
+}
 
 
 // export const DataTableBottomSlide = ({fadeAnim})=>{

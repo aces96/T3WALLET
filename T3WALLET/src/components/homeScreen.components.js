@@ -3,11 +3,16 @@ import { useRef } from 'react';
 import { View , StyleSheet, Text, TouchableOpacity, Animated, Image} from 'react-native';
 import { EditImageSection, SettingsInputs } from './settings.components';
 import { BlurView } from "@react-native-community/blur";
+import { useNavigation } from '@react-navigation/native';
+import {BADGE, PHYGITAL, DIGITAL} from '../fakeData.js/fakeData';
+import { useDispatch } from 'react-redux';
+import { updateCredentiels, updateType } from '../redux/credentielsData';
 
 
 
 
 export const InfoCard = (props)=>{
+
 
     const styles = StyleSheet.create({
         container: {
@@ -103,9 +108,12 @@ export const InfoCard = (props)=>{
 
 export const CredCard = (props)=>{
 
+    const dispatch = useDispatch()
+    const navigation = useNavigation()
+
     const styles = StyleSheet.create({
         container: {
-            width: 110,
+            width: 150,
             height: 80,
             alignSelf: 'center',
             borderRadius: 20, 
@@ -116,9 +124,9 @@ export const CredCard = (props)=>{
             elevation: 10
         },
         title:{
-            fontSize: 13,
+            fontSize: 15,
             color: '#EAEAEA',
-            fontWeight: '400',
+            fontWeight: '600',
             letterSpacing: 4,
             
         }
@@ -126,7 +134,25 @@ export const CredCard = (props)=>{
 
     return (
         
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity onPress={()=>{
+                if(props.title == 'PHYGITAL') {
+                dispatch(updateCredentiels(PHYGITAL))
+                dispatch(updateType('phygital'))
+                navigation.navigate('dataTable')
+                
+            }else if(props.title == 'DIGITAL'){
+                dispatch(updateCredentiels(DIGITAL))
+                dispatch(updateType('digital'))
+                navigation.navigate('dataTable')
+            }else if(props.title == 'BADGE'){
+                dispatch(updateCredentiels(BADGE))
+                dispatch(updateType('digital'))
+                navigation.navigate('dataTable')
+            }else {
+                dispatch(updateCredentiels(PHYGITAL))
+                navigation.navigate('dataTable')
+            }
+            }} style={styles.container}>
                 <Text style={styles.title}>{props.title}</Text>
             </TouchableOpacity>
 
