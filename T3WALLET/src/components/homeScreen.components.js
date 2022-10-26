@@ -16,12 +16,12 @@ export const InfoCard = (props)=>{
 
     const styles = StyleSheet.create({
         container: {
-            height: 450,
-            width: '95%',
-            backgroundColor: 'transparent',
-            borderRadius: 40,
-            marginTop: 30,
-            alignSelf: 'center'
+            height: 430,
+            width: '100%',
+            backgroundColor: '#24A19C',
+            alignSelf: 'center',
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
         },
         button: {
             width: '90%', 
@@ -46,54 +46,56 @@ export const InfoCard = (props)=>{
     return (
         <View style={styles.container}>
 
-            <View style={{height: 80, width: '100%'}}>
-                <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 5}}>
-                    Organisation:
-                </Text>
-                <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
-                    L’Université Mohammed VI Polytechnique
-                </Text>
+            <View style={{width: '100%', height: '75%', backgroundColor: 'white', borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
+                <View style={{height: 80, width: '100%'}}>
+                    <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 5}}>
+                        Organisation:
+                    </Text>
+                    <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
+                        L’Université Mohammed VI Polytechnique
+                    </Text>
 
+                </View>
+
+
+                <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 40, borderRadius: 15, overflow: 'hidden'}}>
+                    <BlurView
+                    style={styles.absolute}
+                    blurType="light"
+                    blurAmount={15}
+                    reducedTransparencyFallbackColor= '#24A19C'
+                    />
+                <Text style={{fontSize: 22, fontWeight: '300', color: 'black'}}>
+                    Total Balance:
+                </Text>
+                <Text style={{fontSize: 22, fontWeight: '500', color: '#24A19C'}}>
+                    1000
+                </Text>
+                </View>
             </View>
 
-
-            <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 40, borderRadius: 15, overflow: 'hidden'}}>
-                <BlurView
-                style={styles.absolute}
-                blurType="light"
-                blurAmount={15}
-                reducedTransparencyFallbackColor= '#24A19C'
-                />
-            <Text style={{fontSize: 22, fontWeight: '300', color: 'black'}}>
-                Total Balance:
-            </Text>
-            <Text style={{fontSize: 22, fontWeight: '500', color: '#24A19C'}}>
-                1000
-            </Text>
-            </View>
-
-            <View style={{width: '100%', height: 65, flexDirection: 'row', marginTop: 15, position: 'absolute', bottom: 50}}>
-                <View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: '#24A19C', alignItems: 'center',}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
+            <View style={{width: '100%', height: 50, flexDirection: 'row', position: 'absolute', bottom: 30}}>
+                <View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: 'white', alignItems: 'center',}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
                         Phygital
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
                         500
                     </Text>
                 </View>
-                <View style={{width: '34%', height: '100%', borderColor: 'black', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
+                <View style={{width: '34%', height: '100%', borderColor: 'white', alignItems: 'center'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
                         Digital
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
                         250
                     </Text>
                 </View>
-                <View style={{width: '33%', height: '100%',borderLeftWidth: 2, borderColor: '#24A19C', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
+                <View style={{width: '33%', height: '100%',borderLeftWidth: 2, borderColor: 'white', alignItems: 'center'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
                         Badge
                     </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: '#24A19C'}}>
+                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
                         250
                     </Text>
                 </View>
@@ -189,9 +191,14 @@ export const HomeScreenTopBar = (props)=>{
             justifyContent: 'flex-end',
         },
         image: {
+            width: '100%',
+            height: '100%',
+            borderRadius: 20,
+        },
+        imageView: {
             width: 40,
             height: 40,
-            borderRadius: 20,
+            marginTop: 35,
             marginLeft: 10,
             marginBottom: 10
         }
@@ -207,7 +214,83 @@ export const HomeScreenTopBar = (props)=>{
                 <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={props.FadeIn ? require('../images/cancel3.png') : require('../images/setting.png')}/>
             </TouchableOpacity>
             </View>
-            <Image style={styles.image} source={require('../images/noImage.png')}/>
+            <TouchableOpacity onPress={()=>props.handleSideBar()} style={styles.imageView}>
+                <Image style={styles.image} source={require('../images/noImage.png')}/>
+            </TouchableOpacity>
         </View>
+    )
+}
+
+
+export const HomeSideBar = (props)=>{
+
+    const styles= StyleSheet.create({
+        container: {
+            height: '100%',
+            backgroundColor: '#24A19C',
+            position: 'absolute',
+            left: 0,
+            zIndex: 200,
+            borderRightWidth: 1,
+            borderColor: 'white'
+        },
+        backButtonView: {
+            width: '100%',
+            height: 50,
+            marginTop: 40,
+        },
+        backButton: {
+            width: 30,
+            height: 30,
+            position: 'absolute',
+            right: 10
+        },
+        backIcon:  {
+            width: '100%',
+            height: '100%'
+        },
+        buttons: {
+            width: '100%',
+            height: 60,
+            backgroundColor: 'rgba(255,255,255,0.6)',
+            marginBottom: 10,
+            borderRadius: 15,
+        },
+        deconnectButton: {
+            width: '100%',
+            height: 60,
+            backgroundColor: 'rgba(204,2,2, 0.9)',
+            position: 'absolute',
+            bottom: 30,
+            borderRadius: 20
+    }
+    })
+
+
+    return (
+        <Animated.View style={{...styles.container, width: props.width}}>
+            <View style={styles.backButtonView}>
+                <TouchableOpacity onPress={()=> props.handleSideBarBack()} style={styles.backButton}>
+                    <Image style={styles.backIcon} source={require('../images/back.png')}/>
+                </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity style={styles.buttons}>
+
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttons}>
+
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttons}>
+
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttons}>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.deconnectButton}>
+
+            </TouchableOpacity>
+        </Animated.View>
     )
 }

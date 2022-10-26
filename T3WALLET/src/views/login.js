@@ -2,11 +2,12 @@ import * as React from 'react';
 import { useState, useCallback} from 'react'
 import { LoginInput } from '../components/login.components';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, StyleSheet, Text, TouchableOpacity, Switch , Image, ToastAndroid, StatusBar} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Switch , Image, ToastAndroid, StatusBar, ImageBackground} from 'react-native';
 import { Logo } from '../components/login.components';
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
 import {useNavigation} from '@react-navigation/native';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import BackgroundImage from '../images/CurveLine.svg'
 
 
 

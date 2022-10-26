@@ -24,7 +24,7 @@ export const  DiplomeImage = ()=>{
     })
 
     React.useEffect(()=>{
-        console.log(credentielInfo.image);
+        console.log(credentielInfo.image)
     },[])
 
     return (
