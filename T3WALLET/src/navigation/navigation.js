@@ -6,6 +6,7 @@ import { Home } from '../views/homeScreen';
 import { DataTable } from '../views/dataTable';
 import { Login } from '../views/login';
 import { CredentielInfo } from '../views/credentielInfo';
+import { QrcodeView } from '../views/qrcodeView';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ export const Navigation = ()=>{
                 <Stack.Screen name='login' component={Login} />
                 <Stack.Screen name='dataTable' component={DataTable}/>
                 <Stack.Screen name='credInfo' component={CredentielInfo}/>
+                <Stack.Screen name='qrcode' component={QrcodeView}/>
             </Stack.Navigator>
 
         </NavigationContainer>

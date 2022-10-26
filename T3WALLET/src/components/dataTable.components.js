@@ -1,9 +1,14 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions } from 'react-native'
+import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions, ToastAndroid} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
-import QRCode from 'react-native-qrcode-svg';
+
+import PlusSvg from '../images/plusSvg2'
+import MoreSvg from '../images/moreSvg2'
+import ShareSvg from '../images/shareSvg2'
+import QrcodeSvg from '../images/qrcodeSvg2'
+import CancelSvg from '../images/cancelSvg'
 
 
 
@@ -220,3 +225,157 @@ export const QrCodePreview = (props)=>{
 
 //   )
 // }
+
+export const PlusSettings = ()=>{
+
+    const [expanded, setExpanded] = useState(false)
+
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
+    const initialValue = useRef(new Animated.Value(60)).current
+
+
+    const expandView = ()=>{
+        Animated.timing(initialValue, {
+          toValue: 350,
+          duration: 300,
+          useNativeDriver: false
+        }).start()
+    }
+    const shrinkView = ()=>{
+        Animated.timing(initialValue, {
+          toValue: 60,
+          duration: 300,
+          useNativeDriver: false
+        }).start()
+    }
+    const styles = StyleSheet.create({
+      container: {
+        height: initialValue,
+        width: initialValue,
+        borderRadius: 30,
+        position: 'absolute',
+        bottom: 20,
+        right: 20,
+        backgroundColor: 'yellow',
+        zIndex: 10
+      },
+      plusIcon: {
+        width: 25,
+        height: 25,
+        position: 'absolute',
+        bottom: 17,
+        right: 18
+      }
+    })
+
+  return (
+      <Animated.View  style={styles.container}>
+          <TouchableOpacity onPress={()=> {
+
+            if(!expanded){
+              setExpanded(true)
+              expandView()
+            }else {
+              setExpanded(false)
+              shrinkView()
+            }
+
+          } } style={styles.plusIcon}>
+            {expanded ? <CancelSvg fill='green' width='100%' height='100%'/> : <PlusSvg fill='green' width='100%' height='100%'/>}
+          </TouchableOpacity>
+        
+      </Animated.View>
+  )
+}
+
+
+
+export const CardMoreModal = (props)=>{
+
+    const [qrCodeSvg, setQrcodeSvg] = useState()
+    const navigation = useNavigation()
+
+
+  const styles = StyleSheet.create({
+    container: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0,0,0,0.6)',
+    },
+    modal: {
+      width: '80%',
+      height: 300,
+      position: 'absolute',
+      zIndex: 300,
+      backgroundColor: 'white',
+      justifyContent: 'space-around'
+    }, 
+    buttons: {
+      width: '90%',
+      height: 70,
+      borderWidth: 2,
+      alignSelf: 'center',
+      borderRadius: 20,
+      borderColor: 'green'
+
+    },
+    text: {
+      fontSize: 25,
+      fontFamily: 'Oswald-Medium',
+      color: 'green',
+      position: 'absolute',
+      top: 8,
+      left: 20
+    }
+  })
+
+
+        
+        
+
+
+    
+
+
+  return (
+    <View style={{width: '100%', height: '100%', position: 'absolute', zIndex: 100, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'  }}>
+      <TouchableOpacity onPress={()=>{
+        props.handleBackgroundPress()
+      }} style={styles.container} activeOpacity={1}>
+      </TouchableOpacity>
+
+      <View style={styles.modal}>
+        <TouchableOpacity style={styles.buttons}>
+          <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
+            <ShareSvg height='100%' width= '100%' fill='green'/>
+          </View>
+
+          <Text style={styles.text}>SHARE</Text>
+
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={()=>navigation.navigate('qrcode')}  style={styles.buttons}>
+          <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
+            <QrcodeSvg height='100%' width= '100%' fill='green'/>
+          </View>
+
+          <Text style={styles.text}>QRCODE</Text>
+
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttons}>
+
+          <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
+            <MoreSvg height='100%' width= '100%' fill='green'/>
+          </View>
+
+          <Text style={styles.text}>MORE</Text>
+
+        </TouchableOpacity>
+
+
+      </View>
+    </View>
+  )
+}

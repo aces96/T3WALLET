@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity, Text, StatusBar, FlatList, SafeAreaView, Animated, Share, ActivityIndicator} from 'react-native'
-import { PhygitalItem,DigitalItem,BadgeItem, ImageView, DataTableTopBar,QrCodePreview } from '../components/dataTable.components';
+import { PhygitalItem,DigitalItem,BadgeItem, ImageView, DataTableTopBar,QrCodePreview, PlusSettings, CardMoreModal } from '../components/dataTable.components';
 import { useState, useRef, useEffect } from 'react';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         justifyContent: 'space-around',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        zIndex: 500
     },
     
 })
@@ -76,6 +77,7 @@ export const DataTable = ()=>{
     const [viewImage, setImageView] = useState(false)
     const [viewQrCode, setViewQrCode] = useState(false)
     const [searchedCred, setSearchedCred] = useState([])
+    const [showModal, setShowModal] = useState(false)
 
 
     useEffect(()=>{
@@ -101,9 +103,8 @@ export const DataTable = ()=>{
     };
 
     const handleEdit = (title, link, image)=>{
-        fadeIn()
-        const data = {title: title, link: link, image: image}
-        dispatch(updateOneCred(data))
+        setShowModal(true)
+        // dispatch(updateOneCred(data))
     }
 
 
@@ -117,21 +118,7 @@ export const DataTable = ()=>{
         setImageView(false)
     }
 
-    const onSwipeDown = (gestureState) => {
-            fadeOut()
-    }
 
-    const onSwipe = (gestureName, gestureState) => {
-        const {SWIPE_UP, SWIPE_DOWN} = swipeDirections;
-        switch (gestureName) {
-        case SWIPE_UP:
-            break;
-        case SWIPE_DOWN:
-            break;
-            default: 
-            break
-        }
-    }
 
 
     const handleSearch = ()=>{
@@ -147,8 +134,7 @@ export const DataTable = ()=>{
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
             <DataTableTopBar />
-
-
+                {showModal && <CardMoreModal handleBackgroundPress={()=>setShowModal(false)} />}
             <View style={styles.navView}>
                 <TouchableOpacity onPress={()=>{
                     dispatch(updateType('phygital'))
@@ -184,45 +170,21 @@ export const DataTable = ()=>{
                 renderItem={({item: lst}) => navTab == 'phygital'? <PhygitalItem handleEdit={handleEdit}  handleClick={handleClick}  title={lst.fullName} link={lst.CredentielLink} key={lst.id} navTab={navTab} />: navTab == 'digital'? <DigitalItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/> : <BadgeItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/>}
                 />
             : <ActivityIndicator size={50} animating={active} style={{alignSelf: 'center', marginTop: 80}}/>}
-            <GestureRecognizer
-            onSwipe={(direction, state) => onSwipe(direction, state)}
-            onSwipeDown={(state) => {
-                console.log(state)
-                onSwipeDown()
-            }}
-            style={{flex: 1}}>
-                <Animated.View style={{...styles.slideUp,height: fadeAnim}}>
 
-                    <TouchableOpacity onPress={()=> navigation.navigate('credInfo')} style={{width: 80, height: 80, borderWidth: 1,marginTop: 20, borderRadius: 25, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
-                        <MoreSvg width={38} height={38} style={{fill: 'black'}}/>
-                    </TouchableOpacity>
-
-
-                    <TouchableOpacity onPress={()=> setViewQrCode(true)} style={{width: 80, height: 80, borderWidth: 1,marginTop: 20, borderRadius: 25, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}}>
-                        <QrCodeSvg width={38} height={38} style={{fill: 'black'}}/>
-                    </TouchableOpacity>
-
-
-                    <TouchableOpacity onPress={ async ()=>{
-                        await Share.share({
-                            message: ''
-                        })
-                    }} style={{width: 80, height: 80, borderWidth: 1, marginTop: 20, borderRadius: 25, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
-                        <ShareSvg width={38} height={38} style={{fill: 'black'}} />
-                    </TouchableOpacity>
-
-
-                </Animated.View> 
-            </GestureRecognizer>
+            <PlusSettings />
 
 
             {viewImage &&
                 <ImageView handleCancel={handleCancel} />
             }
 
+
             {viewQrCode &&
                 <QrCodePreview handleCancel={()=>setViewQrCode(false)} />
             }
+
+
+
 
 
 
