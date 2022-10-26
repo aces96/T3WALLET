@@ -5,13 +5,18 @@ import QRCode from 'react-native-qrcode-svg';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import RNFS from "react-native-fs"
 import SaveSvg from '../images/saveSvg'
-
+import { useNavigation } from '@react-navigation/native';
+import ShareSvg from '../images/shareSvg2'
+import  Share  from 'react-native-share';
 
 
 
 export const QrcodeView = ()=>{
 
+    const navigation = useNavigation()
+
     const [qrCodeSvg, setQrcodeSvg] = useState()
+    const [base64, setBase64] = useState()
 
 
     const styles = StyleSheet.create({
@@ -32,8 +37,30 @@ export const QrcodeView = ()=>{
     })
 
 
+    const shareQrcode = async ()=>{
+        await qrCodeSvg.toDataURL((data)=>{
+            setBase64(data)
+        })
+
+        const options = {
+            title: 'Qrcode image',
+            url: `data:image/png;base64,${base64}`
+        }
+
+
+        Share.open(options).then((res)=>{
+            console.log(res);
+        }).catch((err)=>{
+            console.log(err);
+        })
+
+
+    }
+
+
         const saveQrToDisk = () => {
             qrCodeSvg.toDataURL((data) => {
+                console.log('daaaaaata', data);
               RNFS.writeFile(RNFS.CachesDirectoryPath+"/some-name.png", data, 'base64')
                 .then((success) => {
                   return CameraRoll.saveToCameraRoll(RNFS.CachesDirectoryPath+"/some-name.png", 'photo')
@@ -57,7 +84,11 @@ export const QrcodeView = ()=>{
                 <TouchableOpacity onPress={saveQrToDisk} style={{width: 25, height: 25, position: 'absolute', right: 10}}>
                     <SaveSvg width='100%' height='100%' fill='white' />
                 </TouchableOpacity>
-                <TouchableOpacity style={{width: 25, height: 25, position: 'absolute', left: 10}}>
+
+                <TouchableOpacity onPress={shareQrcode} style={{width: 25, height: 25, position: 'absolute', right: 60}}>
+                    <ShareSvg width='100%' height='100%' fill='white' />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('dataTable')} style={{width: 25, height: 25, position: 'absolute', left: 10}}>
                     <Image style={{width: '100%', height: '100%'}} source={(require('../images/back.png'))}/>
                 </TouchableOpacity>
             </View>
