@@ -229,9 +229,7 @@ export const QrCodePreview = (props)=>{
 export const PlusSettings = ()=>{
 
     const [expanded, setExpanded] = useState(false)
-
-  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-
+    
     const initialValue = useRef(new Animated.Value(60)).current
 
 
@@ -257,15 +255,17 @@ export const PlusSettings = ()=>{
         position: 'absolute',
         bottom: 20,
         right: 20,
-        backgroundColor: 'yellow',
-        zIndex: 10
+        backgroundColor: 'white',
+        zIndex: 10,
+        borderWidth: 2,
+        borderColor: '#24A19C'
       },
       plusIcon: {
         width: 25,
         height: 25,
         position: 'absolute',
-        bottom: 17,
-        right: 18
+        bottom: 15,
+        right: 15,
       }
     })
 

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { View , StyleSheet, Text, TouchableOpacity, Animated, Image} from 'react-native';
 import { EditImageSection, SettingsInputs } from './settings.components';
 import { BlurView } from "@react-native-community/blur";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import {BADGE, PHYGITAL, DIGITAL} from '../fakeData.js/fakeData';
 import { useDispatch } from 'react-redux';
 import { updateCredentiels, updateType } from '../redux/credentielsData';
+import PlusSvg from '../images/plusSvg2'
+import CancelSvg from '../images/cancelSvg'
+
 
 
 
@@ -16,12 +19,22 @@ export const InfoCard = (props)=>{
 
     const styles = StyleSheet.create({
         container: {
-            height: 430,
+            height: 650,
             width: '100%',
             backgroundColor: '#24A19C',
             alignSelf: 'center',
             borderBottomLeftRadius: 50,
             borderBottomRightRadius: 50,
+        },
+        card: {
+            width: '95%',
+            height: '82%',
+            backgroundColor: 'white',
+            alignSelf: 'center',
+            marginTop: 10,
+            borderBottomLeftRadius: 34,
+            borderBottomRightRadius: 34,
+
         },
         button: {
             width: '90%', 
@@ -41,68 +54,83 @@ export const InfoCard = (props)=>{
             bottom: 0,
             right: 0,
             borderRadius: 20
+        },
+        itemView: {
+            width: '93%',
+            height: 80,
+            backgroundColor: 'transparent',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            position: 'absolute',
+            bottom: -38,
+            alignSelf: 'center'
         }
     })
     return (
         <View style={styles.container}>
+            <View style={styles.card}>
+            <View style={{height: 80, width: '100%'}}>
+                <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 5}}>
+                    Organisation:
+                </Text>
+                <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
+                    L’Université Mohammed VI Polytechnique
+                </Text>
 
-            <View style={{width: '100%', height: '75%', backgroundColor: 'white', borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
-                <View style={{height: 80, width: '100%'}}>
-                    <Text style={{ marginLeft: 20,marginTop: 10, fontSize: 18, fontWeight: '600', color: 'black', marginBottom: 5}}>
-                        Organisation:
-                    </Text>
-                    <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
-                        L’Université Mohammed VI Polytechnique
-                    </Text>
-
-                </View>
-
-
-                <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 40, borderRadius: 15, overflow: 'hidden'}}>
-                    <BlurView
-                    style={styles.absolute}
-                    blurType="light"
-                    blurAmount={15}
-                    reducedTransparencyFallbackColor= '#24A19C'
-                    />
+            </View>
+            <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 100, borderRadius: 15, overflow: 'hidden'}}>
+                <BlurView
+                style={styles.absolute}
+                blurType="light"
+                blurAmount={15}
+                reducedTransparencyFallbackColor= '#24A19C'
+                />
                 <Text style={{fontSize: 22, fontWeight: '300', color: 'black'}}>
                     Total Balance:
                 </Text>
                 <Text style={{fontSize: 22, fontWeight: '500', color: '#24A19C'}}>
                     1000
                 </Text>
+            </View>
+
+            <View style={styles.itemView}>
+                <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
+                    <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', justifyContent: 'center', borderBottomWidth: 2}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>PHYGITAL</Text>
+                    </View>
+
+                    <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>500</Text>
+                    </View>
+                </View>
+
+
+
+                <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
+                    <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', borderBottomWidth: 2, justifyContent: 'center'}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>DIGITAL</Text>
+                    </View>
+
+                    <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
+                    </View>
+                </View>
+
+
+
+                <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
+                    <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', borderBottomWidth: 2, justifyContent: 'center'}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>BADGE</Text>
+                    </View>
+
+                    <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
+                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
+                    </View>
                 </View>
             </View>
 
-            <View style={{width: '100%', height: 50, flexDirection: 'row', position: 'absolute', bottom: 30}}>
-                <View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: 'white', alignItems: 'center',}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
-                        Phygital
-                    </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
-                        500
-                    </Text>
-                </View>
-                <View style={{width: '34%', height: '100%', borderColor: 'white', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
-                        Digital
-                    </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
-                        250
-                    </Text>
-                </View>
-                <View style={{width: '33%', height: '100%',borderLeftWidth: 2, borderColor: 'white', alignItems: 'center'}}>
-                    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
-                        Badge
-                    </Text>
-                    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
-                        250
-                    </Text>
-                </View>
             </View>
-            {/* <TouchableOpacity onPress={()=>props.handleClick()} style={styles.button}>
-                <Text style={{color: 'black', fontSize: 15, fontWeight: '600'}}>Demande</Text>
-            </TouchableOpacity> */}
+
         </View>
     )
 }
@@ -294,3 +322,177 @@ export const HomeSideBar = (props)=>{
         </Animated.View>
     )
 }
+
+export const HomePlusAnimatedView = ()=>{
+
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const [expanded, setExpanded] = useState(false)
+
+    const AnimatedDimensions = useRef(new Animated.Value(70)).current;
+
+    const expandView = ()=>{
+        Animated.timing(AnimatedDimensions, {
+            toValue: 300,
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+    }
+
+    const shrinkView = ()=>{
+        Animated.timing(AnimatedDimensions, {
+            toValue: 70,
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+    }
+
+
+
+    const style = StyleSheet.create({
+        container: {
+            alignSelf: 'center',
+            position: 'absolute',
+            bottom: 50,
+            backgroundColor:'white',
+            borderRadius: 35,
+            zIndex: 50,
+            borderWidth: 2,
+            borderColor: 'rgba(36,161,156,1)',
+            elevation: 10
+        },
+        iconButton: {
+            width: 35,
+            height: 35,
+            position: 'absolute',
+            bottom: 17,
+            alignSelf: 'center',
+        },
+        buttonsContainer: {
+            height: '76%',
+            width: '100%',
+            justifyContent: 'space-around',
+            borderTopLeftRadius: 35,
+            borderTopRightRadius: 35,
+            marginTop: 5
+        },
+        buttons: {
+            width: '82%',
+            height: '28%',
+            alignSelf: 'center',
+            backgroundColor: 'rgba(36,161,156,0.5)',
+            borderRadius: 10,
+            borderWidth: 2,
+            borderColor: 'rgba(36,161,156,1)',
+            justifyContent: 'center'
+        },
+        text: {
+            fontFamily: 'Oswald-Medium',
+            color: 'white',
+            textAlign: 'center',
+            fontSize: 18
+        }
+    })
+
+    return (
+            <Animated.View style={{...style.container,width: AnimatedDimensions, height: AnimatedDimensions}}>
+
+                {expanded &&
+                <View style={style.buttonsContainer}>
+                    <TouchableOpacity onPress={()=>{
+                        dispatch(updateCredentiels(PHYGITAL))
+                        dispatch(updateType('phygital'))
+                        navigation.navigate('dataTable')
+                    }} style={style.buttons}>
+                        <Text style={style.text}>
+                            PHYGITAL
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                        dispatch(updateCredentiels(DIGITAL))
+                        dispatch(updateType('digital'))
+                        navigation.navigate('dataTable')
+                    }} style={style.buttons}>
+                        <Text style={style.text}>
+                                DIGITAL
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                        dispatch(updateCredentiels(BADGE))
+                        dispatch(updateType('badge'))
+                        navigation.navigate('dataTable')
+                    }} style={style.buttons}>
+                        <Text style={style.text}>
+                                BADGE
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                
+                }
+
+                <TouchableOpacity onPress={()=>{
+                    if(expanded){
+                        setExpanded(false)
+                        shrinkView()
+                    }else {
+                        setExpanded(true)
+                        expandView()
+                    }
+                }}  style={style.iconButton}>
+                    {expanded ? <CancelSvg width= '100%' height='100%' fill='rgba(36,161,156,1)' /> : <PlusSvg width= '100%' height='100%' fill='rgba(36,161,156,1)' />}
+                </TouchableOpacity>
+            </Animated.View>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <View style={{width: '100%', height: '75%', backgroundColor: 'white', borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
+
+
+
+
+</View>
+
+<View style={{width: '100%', height: 50, flexDirection: 'row', position: 'absolute', bottom: 30}}>
+<View style={{width: '33%', height: '100%',borderRightWidth: 2, borderColor: 'white', alignItems: 'center',}}>
+    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+        Phygital
+    </Text>
+    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+        500
+    </Text>
+</View>
+<View style={{width: '34%', height: '100%', borderColor: 'white', alignItems: 'center'}}>
+    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+        Digital
+    </Text>
+    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+        250
+    </Text>
+</View>
+<View style={{width: '33%', height: '100%',borderLeftWidth: 2, borderColor: 'white', alignItems: 'center'}}>
+    <Text style={{fontSize: 15, fontWeight: '600', color: 'white'}}>
+        Badge
+    </Text>
+    <Text style={{fontSize: 15, fontWeight: '600', marginTop: 10, color: 'white'}}>
+        250
+    </Text>
+</View>
+</View> */}

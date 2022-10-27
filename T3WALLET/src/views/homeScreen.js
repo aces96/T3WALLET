@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { View, StyleSheet , Text, Animated, StatusBar} from 'react-native';
-import { CredCard, InfoCard, SettingsSlide, HomeScreenTopBar, HomeSideBar } from '../components/homeScreen.components';
+import { CredCard, InfoCard, SettingsSlide, HomeScreenTopBar, HomeSideBar, HomePlusAnimatedView } from '../components/homeScreen.components';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 
@@ -60,6 +60,7 @@ export const Home = ()=>{
     return (
         <View  style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
+            <HomePlusAnimatedView />
             <HomeScreenTopBar handleSideBar={showSideBar} FadeIn={FadeIn} handleClick={()=>{
                 if(!FadeIn){
                     fadeIn()
@@ -69,21 +70,12 @@ export const Home = ()=>{
                     setFadeIn(false)
                 }
             }} />
-            <HomeSideBar handleSideBarBack={hideSideBar} width={sideBarWidth} />
+                <HomeSideBar handleSideBarBack={hideSideBar} width={sideBarWidth} />
+                <SettingsSlide fadeAnim={fadeAnim}/>
                 <InfoCard />
-                <View style={{height: 200,width: '90%', justifyContent: 'space-between', alignSelf: 'center', marginTop: 20}}>
-                    <View style={{height: '40%', width: '100%', flexDirection: 'row', alignSelf: 'center', justifyContent: 'space-around'}}>
-                        <CredCard title={'PHYGITAL'} />
-                        <CredCard title={'DIGITAL'}/>
-                    </View>
 
-                    <View style={{height: '40%', width: '100%', flexDirection: 'row', alignSelf: 'center', justifyContent: 'space-around'}}>
-                        <CredCard title={'BADGE'} />
-                        <CredCard title={'PROFIL'}/>
-                    </View>
-                </View>
 
-            <SettingsSlide fadeAnim={fadeAnim}/>
+
         </View>
     )
 }
