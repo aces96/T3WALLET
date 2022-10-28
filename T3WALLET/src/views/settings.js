@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet, StatusBar, Text } from 'react-native';
-import { ProfilInfoCard, ResetPasswordCard } from '../components/settingsScreen.components';
+import { ProfilInfoCard, ResetPasswordCard, EnableFingerPrint, LogOutButton, HelpCard } from '../components/settingsScreen.components';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 
 
 
 export const Settings = ()=>{
+    SystemNavigationBar.navigationHide()
 
     const styles = StyleSheet.create({
         container: {
@@ -33,7 +34,9 @@ export const Settings = ()=>{
             </Text>
 
             <ResetPasswordCard />
-
+            <EnableFingerPrint />
+            <HelpCard />
+            <LogOutButton />
         </View>
     )
 }

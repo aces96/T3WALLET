@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, StatusBar, Image, Animated, TextInput } from 'react-native';
+import { useRef, useState, useCallback } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, StatusBar, Image, Animated, TextInput, Switch } from 'react-native';
 import BackSvg from '../images/backSvg.svg'
 import UpSvg from '../images/upSvg.svg'
 import DownSvg from '../images/downSvg.svg'
+import { storeFingerPrintEnabled, getFingerPrintEnabled, removeFingerPrintEnabled } from '../storage/storage';
+import { useFocusEffect } from '@react-navigation/native';
+import LogoutSvg from '../images/logoutSvg2'
 
 
 
@@ -205,4 +208,197 @@ export const ResetPasswordCard = ()=>{
 
         </Animated.View>
     )
+}
+
+
+
+export const EnableFingerPrint = ()=>{
+
+    const [enabled, setEnabled] = useState()
+
+    const styles = StyleSheet.create({
+        container: {
+            width: '95%',
+            height: 80,
+            alignSelf: 'center',
+            borderWidth: 1,
+            borderColor: '#24A19C',
+            elevation: 4,
+            backgroundColor: 'white',
+            borderRadius: 10,
+            marginTop: 20,
+            justifyContent: 'center'
+        },
+    })
+
+
+    const getFingerPrint = async ()=>{
+        const fingerPrintEnabled =  await getFingerPrintEnabled()
+        
+
+        if (fingerPrintEnabled == null) {
+            setEnabled(false)
+        }else if(fingerPrintEnabled === 'false'){
+            setEnabled(false)
+        }else if(fingerPrintEnabled === 'true'){
+            setEnabled(true)
+        }
+    }
+
+    useFocusEffect(useCallback(()=>{
+
+        getFingerPrint()
+
+
+
+    },[])
+    )
+
+
+    // const handleSwitch = async ()=>{
+        
+
+
+    //         if (fingerPrintEnabled == null) {
+    //             await storeFingerPrintEnabled(enabled.toString())
+    //         }else {
+    //             await removeFingerPrintEnabled()
+    //             await storeFingerPrintEnabled(enabled.toString())
+    //         }
+
+
+    // }
+
+    return (
+        <View style={styles.container}>
+            <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15}}>
+                Enable FingerPrint Authentication
+            </Text>
+
+            <Switch onValueChange={async (e)=>{
+
+                setEnabled(!enabled)
+                await storeFingerPrintEnabled(e.toString())
+            }} value={enabled} trackColor={{ false: "#767577", true: '#24A19C' }} style={{position: 'absolute', right: 10, top: 30}}/>
+        </View>
+    )
+}
+
+
+export const LogOutButton = ()=>{
+    
+    const styles = StyleSheet.create({
+        button: {
+            width: '90%',
+            height: 60,
+            alignSelf: 'center',
+            borderWidth: 1,
+            borderColor: '#CF142B',
+            borderRadius: 15,
+            position: 'absolute',
+            bottom: 30,
+            justifyContent: 'center',
+            elevation: 4,
+            backgroundColor: 'white',
+            shadowColor: '#CF142B'
+        },
+        iconView: {
+            width: 30,
+            height: 30,
+            position: 'absolute',
+            right: 20,
+            top : 19
+        },
+        text: {
+            fontFamily: 'Oswald-Medium',
+            color: '#CF142B',
+            fontSize: 25,
+            marginLeft: 20
+        }
+    })
+
+
+    return(
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Logout</Text>
+            <View style={styles.iconView}>
+                <LogoutSvg width='100%' height='100%' fill= '#CF142B' />
+            </View>
+        </TouchableOpacity>
+    )
+}
+
+
+export const HelpCard = ()=>{
+    const [expanded, setExpanded] = useState(false)
+
+    const initialHeight = useRef(new Animated.Value(100)).current;
+
+
+    const styles = StyleSheet.create({
+        container: {
+            width: '95%',
+            alignSelf: 'center',
+            borderWidth: 1,
+            borderColor: '#24A19C',
+            elevation: 4,
+            backgroundColor: 'white',
+            borderRadius: 10,
+            marginTop: 20
+        },
+        button: {
+            width: 40,
+            height: 40,
+            position: 'absolute',
+            right: 10,
+            top: 10
+        },
+    })
+
+
+
+    const expandCard = ()=>{
+        Animated.timing(initialHeight, {
+            toValue: 250,
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+    }
+
+
+    const shrinkCard = ()=>{
+        Animated.timing(initialHeight, {
+            toValue: 100,
+            duration: 300,
+            useNativeDriver: false
+        }).start()
+    }
+
+
+    return (
+        <Animated.View style={{...styles.container, height: initialHeight}}>
+
+            <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15, marginTop: 10, letterSpacing: 1}}>
+                Help
+            </Text>
+            
+            <TouchableOpacity onPress={()=>{
+                if(expanded){
+                    shrinkCard()
+                    setExpanded(false)
+                }else {
+                    expandCard()
+                    setExpanded(true)
+                }
+            }} style={styles.button}>
+
+                {expanded ? <UpSvg width='100%' height='100%' fill='#24A19C'/>  : <DownSvg width='100%' height='100%' fill='#24A19C'/> }
+
+
+            </TouchableOpacity>
+
+        </Animated.View>
+    )
+
+
 }
