@@ -47,14 +47,16 @@ export const ProfilInfoCard = ()=>{
             borderTopWidth: 1,
             borderBottomWidth: 1,
             elevation: 3,
-            flexDirection: 'row'
+            flexDirection: 'row',
+            borderColor: '#24A19C',
         },
         imageView: {
             width: 90,
             height: 90,
             borderRadius: 45,
             borderWidth: 1,
-            marginTop: 12
+            marginTop: 12,
+            borderColor: '#24A19C',
         },
         OraganisationInfoView: {
             width: 305,
@@ -63,6 +65,7 @@ export const ProfilInfoCard = ()=>{
         }
     })
 
+    
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
@@ -295,12 +298,11 @@ export const LogOutButton = ()=>{
             borderWidth: 1,
             borderColor: '#CF142B',
             borderRadius: 15,
-            position: 'absolute',
-            bottom: 30,
             justifyContent: 'center',
             elevation: 4,
             backgroundColor: 'white',
-            shadowColor: '#CF142B'
+            shadowColor: '#CF142B',
+            marginTop: 20
         },
         iconView: {
             width: 30,
