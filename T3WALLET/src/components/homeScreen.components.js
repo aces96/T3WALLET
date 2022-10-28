@@ -195,7 +195,7 @@ export const SettingsSlide = (props)=>{
 
 
     return (
-        <Animated.View style={{height: props.fadeAnim, width: '100%', position: 'absolute', bottom: 0, borderTopLeftRadius: 50, borderTopRightRadius: 50, backgroundColor: 'white', borderColor: 'rgba(36,161,156,0.4)', borderWidth: 2}}>
+        <Animated.View style={{height: props.fadeAnim, width: '100%', position: 'absolute', bottom: 0, borderTopLeftRadius: 50, borderTopRightRadius: 50, backgroundColor: 'white', borderColor: 'rgba(36,161,156,0.4)', borderWidth: 2, zIndex: 100}}>
             <Text style={{fontSize: 24, fontWeight: '700', textAlign: 'center', color: 'black', marginBottom: 20, marginTop: 10}}>
                 Settings
             </Text>
