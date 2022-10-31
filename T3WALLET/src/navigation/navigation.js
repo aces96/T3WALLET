@@ -18,8 +18,9 @@ export const Navigation = ()=>{
     LogBox.ignoreLogs(['Warning: ...']);
 
     return (
+        
         <NavigationContainer >
-            <Stack.Navigator initialRouteName='resetPassword' screenOptions={{headerShown: false}}>
+            <Stack.Navigator initialRouteName='home' screenOptions={{headerShown: false}}>
                 <Stack.Screen name='home' component={Home} />
                 <Stack.Screen name='login' component={Login} />
                 <Stack.Screen name='dataTable' component={DataTable}/>
@@ -29,5 +30,6 @@ export const Navigation = ()=>{
                 <Stack.Screen name='resetPassword' component={ResetPassword}/>
             </Stack.Navigator>
         </NavigationContainer>
+
     )
 }

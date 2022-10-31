@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native'
 import EmailIllustration from '../images/emailIllustration.svg'
+import EmailIllustration2 from '../images/illustrationSvg2.svg'
 
 
 
@@ -22,7 +23,7 @@ export const Illustration = ()=>{
 
     return (
         <View style={styles.container}>
-            <EmailIllustration width= '50%' height= '100%'/>
+            <EmailIllustration2 width= '50%' height= '100%'/>
         </View>
     )
 }
@@ -58,7 +59,7 @@ export const InputView = ()=>{
             borderColor: '#24A19C',
             borderWidth: 2,
             borderRadius: 15,
-            paddingLeft: 10,
+            paddingLeft: 20,
             color: 'black'
         },
         button: {

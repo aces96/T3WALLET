@@ -7,6 +7,7 @@ import DownSvg from '../images/downSvg.svg'
 import { storeFingerPrintEnabled, getFingerPrintEnabled, removeFingerPrintEnabled } from '../storage/storage';
 import { useFocusEffect } from '@react-navigation/native';
 import LogoutSvg from '../images/logoutSvg2'
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -100,6 +101,9 @@ export const ProfilInfoCard = ()=>{
 
 
 export const ResetPasswordCard = ()=>{
+
+
+    const navigation = useNavigation()
 
     const [expanded, setExpanded] = useState(false)
     const [email, setEmail] = useState('')
@@ -199,7 +203,7 @@ export const ResetPasswordCard = ()=>{
 
                     <TextInput onChangeText={(e)=>setEmail(e)} style={styles.input} placeholder='email@gmail.com' placeholderTextColor={'rgba(0,0,0,0.4)'} value={email}/>
 
-                    <TouchableOpacity style={styles.submitButton}>
+                    <TouchableOpacity onPress={()=> navigation.navigate('resetPassword')} style={styles.submitButton}>
                         <Text style={{color: 'white', fontSize: 15}}>
                             SUBMIT
                         </Text>
