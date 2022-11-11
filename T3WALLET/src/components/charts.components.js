@@ -76,16 +76,7 @@ export const BarCharts = ()=>{
         labels: ["January", "February", "March", "April", "May", "June"],
         datasets: [
         {
-            data: [5, 10, 15, 20, 25, 30],
-            colors: [
-                (opacity = 1) => `red`,
-                (opacity = 1) => `red`,
-                (opacity = 1) => `red`,
-                (opacity = 1) => `red`,
-                (opacity = 1) => `red`,
-                (opacity = 1) => `red`,
-                
-            ]
+            data: [5, 10, 28, 20, 15, 0],
         }
         ],
         
@@ -96,8 +87,11 @@ export const BarCharts = ()=>{
         backgroundGradientFromOpacity: 0.2,
         backgroundGradientTo: "#2dcbc4",
         backgroundGradientToOpacity: 0.5,
+        fillShadowGradient: 'black',
+        fillShadowGradientOpacity: 1,
         data: data.datasets,
-        color: (opacity = 1) => '#fff',
+        decimalPlaces: 0,
+        color: (opacity = 1) => '#6a6a6a',
         labelColor: () => '#6a6a6a',
       };
 
@@ -105,7 +99,7 @@ export const BarCharts = ()=>{
 
     return (
         <View style={styles.container}>
-            <BarChart style={{width: '100%', height: '80%'}}  flatColor={true}   fromZero={true}  chartConfig={chartConfig} data={data} width={'100%'} height={250} segments={6} withCustomBarColorFromData={true} />
+            <BarChart   style={{flex : 1}} chartConfig={chartConfig} data={data} width={Dimensions.get('window').width} height={300} segments={6} />
         </View>
     )
 }
@@ -161,7 +155,8 @@ export const Chart = ()=>{
             flexDirection: 'row',
             justifyContent: 'space-around',
             position: 'absolute',
-            top: 260
+            top: 260,
+            marginTop: 20
         }
     })
 
@@ -188,7 +183,7 @@ export const Chart = ()=>{
 
 
 
-export const MostShareList = ()=>{
+export const MostShareList = (props)=>{
 
     const styles = StyleSheet.create({
         container: {
@@ -207,13 +202,16 @@ export const MostShareList = ()=>{
         }
     })
 
+
+
+
     return (
         <View style={styles.container} >
             <Text style={styles.title}>
                 Most shared credentiels
             </Text>
 
-            <FlatList data={PHYGITAL} renderItem={({item: lst}) =><Card link={lst.CredentielLink} title={lst.fullName} key={lst.id}/>}/>
+            <FlatList  data={PHYGITAL} renderItem={({item: lst}) =><Card handleClick={props.handleClick} handleEdit={props.handleEdit} link={lst.CredentielLink} title={lst.fullName} key={lst.id}/>}/>
         </View>
     )
 }

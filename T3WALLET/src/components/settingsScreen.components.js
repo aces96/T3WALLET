@@ -511,7 +511,7 @@ export const SettingsList = ()=>{
             </View>
 
             <View style={styles.resetPassView}>
-                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>fingerprint authentication</Text>
+                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>fingerprint login</Text>
                 <View style={{width: 50, height: 50, justifyContent: 'center', alignItems: 'center'}} >
                 <Switch onValueChange={async (e)=>{
                     setEnabled(!enabled)

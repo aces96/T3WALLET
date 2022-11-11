@@ -260,19 +260,7 @@ export const HomeScreenTopBar = (props)=>{
 
     return (
         <View style={styles.container}>
-            <View style={{width: 30, height: 30, position: 'absolute', right: 10, bottom: 10}}>
-            <TouchableOpacity onPress={()=>{
-                props.handleClick()
-            }} style={{height: 30, width: 30}}>
-
-                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={require('../images/setting.png')}/>
-            </TouchableOpacity>
-            </View>
-            <TouchableOpacity onPress={()=>props.handlePress()}   style={styles.imageView}>
-                {/* <Image source={require('../images/Menu.png')} style={{width: '100%', height: '100%'}}/> */}
-
-                <BurgerSvg fill={'white'} height='100%' width='100%'/>
-            </TouchableOpacity>
+            
         </View>
     )
 }

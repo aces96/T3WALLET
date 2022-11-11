@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet , TouchableOpacity, Image, ToastAndroid} from 'react-native';
-import { useState , useEffect} from 'react';
+import { useState , useRef} from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import RNFS from "react-native-fs"
@@ -12,6 +12,9 @@ import  Share  from 'react-native-share';
 
 
 export const QrcodeView = ()=>{
+    
+    const ref = useRef(null)
+
 
     const navigation = useNavigation()
 
@@ -37,22 +40,24 @@ export const QrcodeView = ()=>{
     })
 
 
-    const shareQrcode =  async ()=>{
-        await qrCodeSvg.toDataURL((data)=>{
-            setBase64(data)
-        })
+    const shareQrcode =   async ()=>{
 
-        const options = {
-            title: 'Qrcode image',
-            url: `data:image/png;base64,${base64}`
+        console.log('reeeeeeeeeeef', ref.current);
+        try {
+            await ref.current.toDataURL((data)=>{
+                setBase64(data)
+            })
+            
+            const options = {
+                title: 'Qrcode image',
+                url: `data:image/png;base64,${base64}`
+            }
+            await Share.open(options)
+    
+    
+        } catch (error) {
+            console.log('error',error);
         }
-
-
-        Share.open(options).then((res)=>{
-            console.log(res);
-        }).catch((err)=>{
-            console.log(err);
-        })
 
 
     }
@@ -88,13 +93,13 @@ export const QrcodeView = ()=>{
                 <TouchableOpacity onPress={()=>shareQrcode()} style={{width: 25, height: 25, position: 'absolute', right: 60}}>
                     <ShareSvg width='100%' height='100%' fill='white' />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate('dataTable')} style={{width: 25, height: 25, position: 'absolute', left: 10}}>
+                <TouchableOpacity onPress={()=>navigation.goBack()} style={{width: 25, height: 25, position: 'absolute', left: 10}}>
                     <Image style={{width: '100%', height: '100%'}} source={(require('../images/back.png'))}/>
                 </TouchableOpacity>
                 </View>
                 <QRCode 
                 value='https://cred.sensthings.io/index.php?v=6fab9c920a8d8856575153e4bfff8e8c'
-                getRef={(qr)=>setQrcodeSvg(qr)}
+                getRef={(qr)=>ref.current = qr}
                 quietZone={30}
                 size={300}
                 />
