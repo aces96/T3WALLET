@@ -11,7 +11,6 @@ export const EditImageSection = ()=>{
 
     const [image,setImage] = useState('')
 
-
     const styles = StyleSheet.create({
         container: {
             height: 200,
@@ -56,6 +55,9 @@ export const EditImageSection = ()=>{
         console.log(image.assets[0].uri)
     }
 
+
+
+
     return (
         <View style={styles.container}>
             <View style={styles.imageView}>  
@@ -68,10 +70,12 @@ export const EditImageSection = ()=>{
     )
 }
 
+
+
+
 export const SettingsInputs = ()=>{
 
     const [organisationName, setOrganisationName] = useState('L’Université Mohammed VI Polytechnique')
-
     const styles = StyleSheet.create({
         container: {
             width: '100%',
@@ -112,6 +116,7 @@ export const SettingsInputs = ()=>{
                     Organisation: 
                 </Text>
 
+                
                 <TextInput onChangeText={(e)=> setOrganisationName(e)} style={styles.input}  value={organisationName}/>
             </View>
 
@@ -165,6 +170,8 @@ const AddBalance = ()=>{
         </View>
     )
 }
+
+
 
 export const DeconnectButton = ()=>{
 

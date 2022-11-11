@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState, useCallback } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, StatusBar, Image, Animated, TextInput, Switch } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, StatusBar, Animated, TextInput, Switch, ScrollView } from 'react-native';
 import BackSvg from '../images/backSvg.svg'
 import UpSvg from '../images/upSvg.svg'
 import DownSvg from '../images/downSvg.svg'
@@ -8,10 +8,16 @@ import { storeFingerPrintEnabled, getFingerPrintEnabled, removeFingerPrintEnable
 import { useFocusEffect } from '@react-navigation/native';
 import LogoutSvg from '../images/logoutSvg2'
 import { useNavigation } from '@react-navigation/native';
+import NavigationSvg from '../images/navigateSvg.svg'
+import ArrowSvg from '../images/rightArrowSvg.svg'
 
 
 
 export const ProfilInfoCard = ()=>{
+
+
+    const navigation = useNavigation()
+
 
     const styles = StyleSheet.create({
         container: {
@@ -26,9 +32,9 @@ export const ProfilInfoCard = ()=>{
             justifyContent: 'flex-end'
         },
         text:{
-            fontFamily: 'Oswald-Medium',
+            fontFamily: 'Roboto-Medium',
             fontSize: 28,
-            color: 'black',
+            color: 'rgba(0,0,0,1)',
             textAlign: 'center',
             marginBottom: 15
         },
@@ -49,7 +55,7 @@ export const ProfilInfoCard = ()=>{
             borderBottomWidth: 1,
             elevation: 3,
             flexDirection: 'row',
-            borderColor: '#24A19C',
+            borderColor: 'rgba(0,0,0,0.6)',
         },
         imageView: {
             width: 90,
@@ -59,20 +65,23 @@ export const ProfilInfoCard = ()=>{
             marginTop: 12,
             borderColor: '#24A19C',
         },
-        OraganisationInfoView: {
+        OraganisationInfoView:{
             width: 305,
             height: '100%',
             backgroundColor: 'white',
         }
     })
 
+
     
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
             <View style={styles.backButtonView}>
-                <TouchableOpacity style={styles.backButton}>
-                    <BackSvg width='100%' height='100%' fill='black' />
+                <TouchableOpacity onPress={()=>{
+                    navigation.goBack()
+                }}  style={styles.backButton}>
+                    <BackSvg width='100%' height='100%' fill= 'rgba(0,0,0,1)' />
                 </TouchableOpacity>
                 <Text style={styles.text}>
                     Profil
@@ -80,23 +89,21 @@ export const ProfilInfoCard = ()=>{
             </View>
 
             <View style={styles.card}>
-                <View style={styles.imageView}>
-                    <Image style={{width: '100%', height: '100%', borderRadius: 50}} source={require('../images/noImage.png')}/>
-                </View>
-
                 <View style={styles.OraganisationInfoView}>
-                    <Text style={{fontFamily: 'Oswald-Medium', fontSize: 20, color: 'black',marginLeft: 20, marginTop: 20}}>
+                    <Text style={{fontFamily: 'Roboto-Medium', fontSize: 20, color: 'black', marginTop: 20}}>
                         Organisation:
                     </Text>
 
-                    <Text style={{fontFamily: 'Oswald-Light', fontSize: 15, color: '#24A19C', marginLeft: 20}}>
-                        L’Université Mohammed VI Polytechnique
-                    </Text>
 
+                    <Text style={{fontFamily: 'Roboto-Regular', fontSize: 14, color: '#24A19C'}}>
+                        L’Université mohammed VI polytechnique
+                    </Text>
                 </View>
             </View>
         </View>
     )
+
+
 }
 
 
@@ -178,7 +185,7 @@ export const ResetPasswordCard = ()=>{
         <Animated.View style={{...styles.container, height: initialHeight}}>
 
             <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15, marginTop: 10}}>
-                Reset Password
+                Reset password
             </Text>
             <TouchableOpacity onPress={()=>{
                 if(expanded){
@@ -221,12 +228,11 @@ export const ResetPasswordCard = ()=>{
 
 export const EnableFingerPrint = ()=>{
 
-    const [enabled, setEnabled] = useState()
 
     const styles = StyleSheet.create({
         container: {
             width: '95%',
-            height: 80,
+            height: 70,
             alignSelf: 'center',
             borderWidth: 1,
             borderColor: '#24A19C',
@@ -239,27 +245,6 @@ export const EnableFingerPrint = ()=>{
     })
 
 
-    const getFingerPrint = async ()=>{
-        const fingerPrintEnabled =  await getFingerPrintEnabled()
-        
-
-        if (fingerPrintEnabled == null) {
-            setEnabled(false)
-        }else if(fingerPrintEnabled === 'false'){
-            setEnabled(false)
-        }else if(fingerPrintEnabled === 'true'){
-            setEnabled(true)
-        }
-    }
-
-    useFocusEffect(useCallback(()=>{
-
-        getFingerPrint()
-
-
-
-    },[])
-    )
 
 
     // const handleSwitch = async ()=>{
@@ -279,14 +264,10 @@ export const EnableFingerPrint = ()=>{
     return (
         <View style={styles.container}>
             <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15}}>
-                Enable FingerPrint Authentication
+                Enable fingerPrint authentication
             </Text>
 
-            <Switch onValueChange={async (e)=>{
 
-                setEnabled(!enabled)
-                await storeFingerPrintEnabled(e.toString())
-            }} value={enabled} trackColor={{ false: "#767577", true: '#24A19C' }} style={{position: 'absolute', right: 10, top: 30}}/>
         </View>
     )
 }
@@ -296,7 +277,7 @@ export const LogOutButton = ()=>{
     
     const styles = StyleSheet.create({
         button: {
-            width: '90%',
+            width: '95%',
             height: 60,
             alignSelf: 'center',
             borderWidth: 1,
@@ -407,4 +388,137 @@ export const HelpCard = ()=>{
     )
 
 
+}
+
+
+export const SupportButton = ()=>{
+
+    const styles = StyleSheet.create({
+        container: {
+            width: '95%',
+            height: 70,
+            alignSelf: 'center',
+            borderWidth: 1,
+            borderColor: '#24A19C',
+            elevation: 4,
+            backgroundColor: 'white',
+            borderRadius: 10,
+            marginTop: 20
+        },
+        iconView: {
+            width: 35,
+            height: 35,
+            position: 'absolute',
+            right: 10,
+            top: 18
+        }
+    })
+
+    
+    return (
+
+        <TouchableOpacity activeOpacity={0.8} style={styles.container}>
+            
+            <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15, marginTop: 10}}>
+                Support
+            </Text>
+
+            <View style={styles.iconView}>
+                <NavigationSvg width={'100%'} height={'100%'} fill={'#24A19C'}/>
+            </View>
+        </TouchableOpacity>
+
+    )
+}
+
+
+
+export const SettingsList = ()=>{
+
+    const [enabled, setEnabled] = useState()
+    const navigation = useNavigation()
+
+
+
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+
+        },
+        resetPassView: {
+            width: '95%',
+            height: 80,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingRight: 20,
+            paddingLeft: 10,
+            marginTop: 5,
+            borderRadius: 10,
+            alignSelf: 'center',
+            backgroundColor: 'white',
+            alignSelf: 'center',
+            elevation: 5
+        }
+    })
+
+    
+    const getFingerPrint = async ()=>{
+        const fingerPrintEnabled =  await getFingerPrintEnabled()
+        
+
+        if (fingerPrintEnabled == null) {
+            setEnabled(false)
+        }else if(fingerPrintEnabled === 'false'){
+            setEnabled(false)
+        }else if(fingerPrintEnabled === 'true'){
+            setEnabled(true)
+        }
+    }
+
+    useFocusEffect(useCallback(()=>{
+
+        getFingerPrint()
+    },[])
+    )
+
+
+
+
+
+
+    return (
+        <ScrollView style={styles.container}>
+            <TouchableOpacity onPress={()=>navigation.navigate('resetPassword')} style={styles.resetPassView}>
+                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}> Reset password</Text>
+                <View style={{width: 35, height: 35, borderWidth: 1, borderRadius: 35/2, justifyContent: 'center', alignItems: 'center', paddingLeft: 5, backgroundColor: 'rgba(0,0,0,0.1)'}} >
+                    <ArrowSvg width={20} height={20} fill={'rgba(0,0,0,0.3)'}/>
+                </View>
+            </TouchableOpacity>
+
+            <View style={styles.resetPassView}>
+                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>Analytics</Text>
+                <View style={{width: 35, height: 35, borderWidth: 1, borderRadius: 35/2, justifyContent: 'center', alignItems: 'center', paddingLeft: 5, backgroundColor: 'rgba(0,0,0,0.1)'}} >
+                    <ArrowSvg width={20} height={20} fill={'rgba(0,0,0,0.3)'}/>
+                </View>
+            </View>
+            <View style={styles.resetPassView}>
+                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>Contact support</Text>
+                <View style={{width: 35, height: 35, borderWidth: 1, borderRadius: 35/2, justifyContent: 'center', alignItems: 'center', paddingLeft: 5, backgroundColor: 'rgba(0,0,0,0.1)'}} >
+                    <ArrowSvg width={20} height={20} fill={'rgba(0,0,0,0.3)'}/>
+                </View>
+            </View>
+
+            <View style={styles.resetPassView}>
+                <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>fingerprint authentication</Text>
+                <View style={{width: 50, height: 50, justifyContent: 'center', alignItems: 'center'}} >
+                <Switch onValueChange={async (e)=>{
+                    setEnabled(!enabled)
+                    await storeFingerPrintEnabled(e.toString())
+                    }} value={enabled} trackColor={{ false: "#767577", true: '#24A19C' }} style={{transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }]}}/>
+                </View>
+            </View>
+        </ScrollView>
+    )
 }

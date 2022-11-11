@@ -9,6 +9,8 @@ import { CredentielInfo } from '../views/credentielInfo';
 import { QrcodeView } from '../views/qrcodeView';
 import { Settings } from '../views/settings';
 import { ResetPassword } from '../views/resetPassword';
+import { Support } from '../views/support';
+import { Charts } from '../views/charts';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,8 @@ export const Navigation = ()=>{
                 <Stack.Screen name='qrcode' component={QrcodeView}/>
                 <Stack.Screen name='settings' component={Settings}/>
                 <Stack.Screen name='resetPassword' component={ResetPassword}/>
+                <Stack.Screen name='support' component={Support}/>
+                <Stack.Screen name='charts' component={Charts}/>
             </Stack.Navigator>
         </NavigationContainer>
 

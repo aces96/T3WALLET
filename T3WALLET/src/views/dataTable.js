@@ -3,10 +3,6 @@ import {View, StyleSheet, TextInput, TouchableOpacity, Text, StatusBar, FlatList
 import { PhygitalItem,DigitalItem,BadgeItem, ImageView, DataTableTopBar,QrCodePreview, PlusSettings, CardMoreModal } from '../components/dataTable.components';
 import { useState, useRef, useEffect } from 'react';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import ShareSvg from '../images/shareSvg.svg'
-import QrCodeSvg from '../images/qrCodeSvg.svg'
-import MoreSvg from '../images/moreSvg.svg'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { updateCredentiels, updateOneCred, updateType } from '../redux/credentielsData';
@@ -122,19 +118,14 @@ export const DataTable = ()=>{
 
 
     const handleSearch = ()=>{
-
-
-    setSearchedCred(credentiels.filter((data)=> data.fullName.slice(0, search.length).toUpperCase() == search.toUpperCase()
-    ))
-    console.log('newwwwData',searchedCred);
+    setSearchedCred(credentiels.filter((data)=> data.fullName.slice(0, search.length).toUpperCase() == search.toUpperCase()))
     }
-
-
+    
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
             <DataTableTopBar />
-                {showModal && <CardMoreModal handleBackgroundPress={()=>setShowModal(false)} />}
+                {showModal &&  <CardMoreModal handleBackgroundPress={()=>setShowModal(false)}/>}
             <View style={styles.navView}>
                 <TouchableOpacity onPress={()=>{
                     dispatch(updateType('phygital'))
@@ -164,32 +155,19 @@ export const DataTable = ()=>{
                 }} value={search} style={styles.input} placeholder='Rechercher' placeholderTextColor='rgba(0,0,0,0.5)' />
             </View>
 
-            {!active ? 
+            { !active ? 
                 <FlatList
                 data={searchedCred.length > 0 ? searchedCred : search.length == 1 ?  credentiels : credentiels}
                 renderItem={({item: lst}) => navTab == 'phygital'? <PhygitalItem handleEdit={handleEdit}  handleClick={handleClick}  title={lst.fullName} link={lst.CredentielLink} key={lst.id} navTab={navTab} />: navTab == 'digital'? <DigitalItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/> : <BadgeItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/>}
                 />
-            : <ActivityIndicator size={50} animating={active} style={{alignSelf: 'center', marginTop: 80}}/>}
-
+                : <ActivityIndicator size={50} animating={active} style={{alignSelf: 'center', marginTop: 80}}/>}
             <PlusSettings />
-
-
             {viewImage &&
                 <ImageView handleCancel={handleCancel} />
             }
-
-
             {viewQrCode &&
                 <QrCodePreview handleCancel={()=>setViewQrCode(false)} />
             }
-
-
-
-
-
-
-
-
         </SafeAreaView>
     )
 }

@@ -152,11 +152,16 @@ export const ImageView = (props)=>{
         }} style={{flex: 1, position: 'absolute', right: 20, top: 35, marginBottom: 10, zIndex: 100}}>
           <Image style={{height: 35 , width: 35}} source={require('../images/cancel.png')}/>
         </TouchableOpacity>
-        <ReactNativeZoomableView pinchToZoomInSensitivity={5}	 contentWidth={Dimensions.get('window').get} contentHeight={150} maxZoom={2}>
+
+
+        <ReactNativeZoomableView pinchToZoomInSensitivity={5}	 contentWidth={Dimensions.get('window').get} contentHeight={150} maxZoom={2} minZoom={1} movementSensibility={2} >
           <Image style={{width: Dimensions.get('window').width, height: 300, resizeMode: 'contain'}}  source={require('../images/diplome.png')}/>
         </ReactNativeZoomableView>
+
+
     </View>
   )
+  
 }
 
 
@@ -293,7 +298,6 @@ export const PlusSettings = ()=>{
 
 export const CardMoreModal = (props)=>{
 
-    const [qrCodeSvg, setQrcodeSvg] = useState()
     const navigation = useNavigation()
 
 
@@ -317,22 +321,17 @@ export const CardMoreModal = (props)=>{
       borderWidth: 2,
       alignSelf: 'center',
       borderRadius: 20,
-      borderColor: 'green'
-
+      borderColor: '#24A19C'
     },
     text: {
-      fontSize: 25,
+      fontSize: 20,
       fontFamily: 'Oswald-Medium',
-      color: 'green',
+      color: '#24A19C',
       position: 'absolute',
-      top: 8,
+      top: 13,
       left: 20
     }
   })
-
-
-        
-        
 
 
     
@@ -348,7 +347,7 @@ export const CardMoreModal = (props)=>{
       <View style={styles.modal}>
         <TouchableOpacity style={styles.buttons}>
           <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
-            <ShareSvg height='100%' width= '100%' fill='green'/>
+            <ShareSvg height='100%' width= '100%' fill='#24A19C'/>
           </View>
 
           <Text style={styles.text}>SHARE</Text>
@@ -357,7 +356,7 @@ export const CardMoreModal = (props)=>{
 
         <TouchableOpacity onPress={()=>navigation.navigate('qrcode')}  style={styles.buttons}>
           <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
-            <QrcodeSvg height='100%' width= '100%' fill='green'/>
+            <QrcodeSvg height='100%' width= '100%' fill='#24A19C'/>
           </View>
 
           <Text style={styles.text}>QRCODE</Text>
@@ -367,7 +366,7 @@ export const CardMoreModal = (props)=>{
         <TouchableOpacity style={styles.buttons}>
 
           <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
-            <MoreSvg height='100%' width= '100%' fill='green'/>
+            <MoreSvg height='100%' width= '100%' fill='#24A19C'/>
           </View>
 
           <Text style={styles.text}>MORE</Text>

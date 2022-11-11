@@ -33,16 +33,16 @@ export const LoginInput = (props)=>{
             width: '90%',
             height: 60,
             borderRadius:  15,
-            borderColor:  '#24A19C',
             borderWidth : 2,
             backgroundColor: 'rgba(0,0,0,0.05)',
             alignSelf: 'center',
             paddingLeft: 15,
             color: 'black',
+            marginTop: 20
         }
     })
     return (
-        <TextInput onChangeText={(e)=>props.handleChange(e)} secureTextEntry={props.secureTextEntry} style={styles.input} value={props.value} placeholder={props.placeholder} placeholderTextColor={'rgba(0,0,0,0.4)'}/>
+        <TextInput onChangeText={(e)=>props.handleChange(e)} secureTextEntry={props.secureTextEntry} style={{...styles.input, borderColor: props.color}} value={props.value} placeholder={props.placeholder} placeholderTextColor={'rgba(0,0,0,0.4)'}/>
     )
 
 }

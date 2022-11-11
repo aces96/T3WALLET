@@ -37,7 +37,7 @@ export const QrcodeView = ()=>{
     })
 
 
-    const shareQrcode = async ()=>{
+    const shareQrcode =  async ()=>{
         await qrCodeSvg.toDataURL((data)=>{
             setBase64(data)
         })
@@ -81,23 +81,23 @@ export const QrcodeView = ()=>{
     return (
         <View style={styles.container}>
             <View style={styles.topBar}>
-                <TouchableOpacity onPress={saveQrToDisk} style={{width: 25, height: 25, position: 'absolute', right: 10}}>
+                <TouchableOpacity onPress={()=>saveQrToDisk()} style={{width: 25, height: 25, position: 'absolute', right: 10}}>
                     <SaveSvg width='100%' height='100%' fill='white' />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={shareQrcode} style={{width: 25, height: 25, position: 'absolute', right: 60}}>
+                <TouchableOpacity onPress={()=>shareQrcode()} style={{width: 25, height: 25, position: 'absolute', right: 60}}>
                     <ShareSvg width='100%' height='100%' fill='white' />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('dataTable')} style={{width: 25, height: 25, position: 'absolute', left: 10}}>
                     <Image style={{width: '100%', height: '100%'}} source={(require('../images/back.png'))}/>
                 </TouchableOpacity>
-            </View>
-            <QRCode 
-            value='https://cred.sensthings.io/index.php?v=6fab9c920a8d8856575153e4bfff8e8c'
-            getRef={(qr)=>setQrcodeSvg(qr)}
-            quietZone={30}
-            size={300}
-            />
+                </View>
+                <QRCode 
+                value='https://cred.sensthings.io/index.php?v=6fab9c920a8d8856575153e4bfff8e8c'
+                getRef={(qr)=>setQrcodeSvg(qr)}
+                quietZone={30}
+                size={300}
+                />
         </View>
     )
 }

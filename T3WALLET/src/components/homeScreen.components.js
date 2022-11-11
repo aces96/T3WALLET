@@ -9,6 +9,11 @@ import { useDispatch } from 'react-redux';
 import { updateCredentiels, updateType } from '../redux/credentielsData';
 import PlusSvg from '../images/plusSvg2'
 import CancelSvg from '../images/cancelSvg'
+import { PieCharts } from './charts.components';
+import BurgerSvg from '../images/burgerSvg.svg'
+import SettingsSvg from '../images/settingsSvg.svg'
+import StatsSvg from '../images/statsSvg.svg'
+import CertifSvg from '../images/certifSvg.svg'
 
 
 
@@ -17,9 +22,13 @@ import CancelSvg from '../images/cancelSvg'
 export const InfoCard = (props)=>{
 
 
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+
     const styles = StyleSheet.create({
         container: {
-            height: 650,
+            height: 600,
             width: '100%',
             backgroundColor: '#24A19C',
             alignSelf: 'center',
@@ -74,11 +83,11 @@ export const InfoCard = (props)=>{
                     Organisation:
                 </Text>
                 <Text style={{ marginLeft: 20,marginTop: 5, fontSize: 15, fontWeight: '400', color: '#24A19C', marginBottom: 20}}>
-                    L’Université Mohammed VI Polytechnique
+                    L’Université mohammed VI polytechnique
                 </Text>
 
             </View>
-            <View style= {{width: 170, height: 120, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 100, borderRadius: 15, overflow: 'hidden'}}>
+            <View style= {{width: 170, height: 100, borderWidth: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(36,161,156,0.3)', alignSelf: 'center', marginTop: 80, borderRadius: 15, overflow: 'hidden', marginBottom: 20, elevation: 15, shadowColor: 'rgba(36,161,156,0.9)'}}>
                 <BlurView
                 style={styles.absolute}
                 blurType="light"
@@ -86,13 +95,31 @@ export const InfoCard = (props)=>{
                 reducedTransparencyFallbackColor= '#24A19C'
                 />
                 <Text style={{fontSize: 22, fontWeight: '300', color: 'black'}}>
-                    Total Balance:
+                    Total balance:
                 </Text>
                 <Text style={{fontSize: 22, fontWeight: '500', color: '#24A19C'}}>
                     1000
                 </Text>
             </View>
 
+            <View style={{width: '90%', height: 80, backgroundColor: 'white', marginTop: 40, justifyContent: 'space-around', flexDirection: 'row', alignSelf: 'center'}}>
+                <TouchableOpacity onPress={()=>{
+                    dispatch(updateCredentiels(PHYGITAL))
+                    dispatch(updateType('phygital'))
+                    navigation.navigate('dataTable')
+                    }} style={{width: '28%',height: '100%', backgroundColor: 'white', borderRadius: 30, justifyContent: 'center', alignItems: 'center', borderColor: '#24A19C', borderWidth: 2, shadowColor: '#24A19C', elevation: 15}}>
+                    <CertifSvg width={35} height={35} fill={'#24A19C'}/>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>navigation.navigate('charts')} style={{width: '28%',height: '100%', backgroundColor: 'white', borderRadius: 30, justifyContent: 'center', alignItems: 'center', borderColor: '#24A19C', borderWidth: 2, shadowColor: '#24A19C', elevation: 15}}>
+                    <StatsSvg width={35} height={35} fill={'#24A19C'}/>
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={()=>navigation.navigate('settings')} style={{width: '25%',height: '100%', backgroundColor: 'white', borderRadius: 30, justifyContent: 'center', alignItems: 'center', borderColor: '#24A19C', borderWidth: 2, shadowColor: '#24A19C', elevation: 15}}>
+                    <SettingsSvg width={35} height={35} fill={'#24A19C'} />
+                </TouchableOpacity>
+
+            </View>
             <View style={styles.itemView}>
                 <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
                     <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', justifyContent: 'center', borderBottomWidth: 2}}>
@@ -201,8 +228,6 @@ export const SettingsSlide = (props)=>{
             </Text>
             <EditImageSection />
             <SettingsInputs />
-            
-            
         </Animated.View>
     )
 }
@@ -218,18 +243,19 @@ export const HomeScreenTopBar = (props)=>{
             backgroundColor: '#24A19C',
             justifyContent: 'flex-end',
         },
+
         image: {
             width: '100%',
             height: '100%',
             borderRadius: 20,
         },
         imageView: {
-            width: 40,
-            height: 40,
-            marginTop: 35,
-            marginLeft: 10,
+            width: 30,
+            height: 30,
+            marginTop: 50,
+            marginLeft: 13,
             marginBottom: 10
-        }
+        },
     })
 
     return (
@@ -239,11 +265,13 @@ export const HomeScreenTopBar = (props)=>{
                 props.handleClick()
             }} style={{height: 30, width: 30}}>
 
-                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={props.FadeIn ? require('../images/cancel3.png') : require('../images/setting.png')}/>
+                <Image style={{width: 30, height: 30, alignSelf: 'flex-end'}} source={require('../images/setting.png')}/>
             </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={()=>props.handleSideBar()} style={styles.imageView}>
-                <Image style={styles.image} source={require('../images/noImage.png')}/>
+            <TouchableOpacity onPress={()=>props.handlePress()}   style={styles.imageView}>
+                {/* <Image source={require('../images/Menu.png')} style={{width: '100%', height: '100%'}}/> */}
+
+                <BurgerSvg fill={'white'} height='100%' width='100%'/>
             </TouchableOpacity>
         </View>
     )
@@ -428,8 +456,8 @@ export const HomePlusAnimatedView = ()=>{
                         </Text>
                     </TouchableOpacity>
                 </View>
-                
                 }
+
 
                 <TouchableOpacity onPress={()=>{
                     if(expanded){
@@ -440,7 +468,7 @@ export const HomePlusAnimatedView = ()=>{
                         expandView()
                     }
                 }}  style={style.iconButton}>
-                    {expanded ? <CancelSvg width= '100%' height='100%' fill='rgba(36,161,156,1)' /> : <PlusSvg width= '100%' height='100%' fill='rgba(36,161,156,1)' />}
+                    {expanded ? <CancelSvg width= '100%' height='100%' fill='rgba(36,161,156,1)'/> : <PlusSvg width= '100%' height='100%' fill='rgba(36,161,156,1)' />}
                 </TouchableOpacity>
             </Animated.View>
     )

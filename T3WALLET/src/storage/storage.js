@@ -34,8 +34,10 @@ export const removeFingerPrintEnabled = async () => {
     try {
       await AsyncStorage.removeItem('fingerPrint')
     } catch(e) {
-      // remove error
+
+        console.log('====================================');
+        console.log(e);
+        console.log('====================================');
     }
-  
     console.log('Done.')
-  }
+}
