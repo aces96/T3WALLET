@@ -5,8 +5,8 @@ import {PieChart, BarChart} from 'react-native-chart-kit';
 import BackSvg from '../images/backSvg.svg'
 import { Card } from './dataTable.components';
 import { PHYGITAL } from '../fakeData.js/fakeData';
-import { useScrollToTop } from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 
 
@@ -99,7 +99,7 @@ export const BarCharts = ()=>{
 
     return (
         <View style={styles.container}>
-            <BarChart   style={{flex : 1}} chartConfig={chartConfig} data={data} width={Dimensions.get('window').width} height={300} segments={6} />
+            <BarChart   style={{flex : 1, marginTop: 5}} chartConfig={chartConfig} data={data} width={Dimensions.get('window').width} height={300} segments={10} fromZero={true} />
         </View>
     )
 }
@@ -139,7 +139,6 @@ export const TopBar = ()=>{
 
 export const Chart = ()=>{
 
-
     const [step, setStep ] = useState(1)
 
     const styles = StyleSheet.create({
@@ -160,9 +159,32 @@ export const Chart = ()=>{
         }
     })
 
+
+    const onSwipeLeft = ()=>{
+        if(step == 1){
+            setStep(2)
+        }else if(step ==2){
+            setStep(1)
+        }
+    }
+    const onSwipeRight = ()=>{
+        if(step == 1){
+            setStep(2)
+        }else if(step ==2){
+            setStep(1)
+        }
+    }
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+      };
+
     return (
         <View style={styles.container} >
-            {step == 1 ? <BarCharts /> : <PieCharts />}
+
+            <GestureRecognizer config={config} onSwipeLeft={onSwipeLeft} onSwipeRight={onSwipeRight} style={{flex: 1}}>
+                {step == 1 ? <BarCharts /> : <PieCharts />}
+            </GestureRecognizer>
 
             <View style={styles.buttonsView}>
                 <TouchableOpacity onPress={()=>{

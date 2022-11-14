@@ -503,12 +503,12 @@ export const SettingsList = ()=>{
                     <ArrowSvg width={20} height={20} fill={'rgba(0,0,0,0.3)'}/>
                 </View>
             </View>
-            <View style={styles.resetPassView}>
+            <TouchableOpacity onPress={()=>navigation.navigate('support')} style={styles.resetPassView}>
                 <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>Contact support</Text>
                 <View style={{width: 35, height: 35, borderWidth: 1, borderRadius: 35/2, justifyContent: 'center', alignItems: 'center', paddingLeft: 5, backgroundColor: 'rgba(0,0,0,0.1)'}} >
                     <ArrowSvg width={20} height={20} fill={'rgba(0,0,0,0.3)'}/>
                 </View>
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.resetPassView}>
                 <Text style={{fontSize: 18, color: 'black', fontFamily: 'Roboto-Medium', letterSpacing: 1}}>fingerprint login</Text>
