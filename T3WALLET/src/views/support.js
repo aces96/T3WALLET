@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { TopBar } from '../components/charts.components';
 import { Illustration, SupportText } from '../components/support.components';
+
 
 
 
@@ -21,6 +23,7 @@ export const Support = ()=>{
 
     return (
         <View  style={styles.container}>
+            <TopBar />
             <Illustration />
             <SupportText />
 

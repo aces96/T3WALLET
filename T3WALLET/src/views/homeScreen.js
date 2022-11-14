@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useRef, useState, useCallback } from 'react';
 import { View, StyleSheet , Text, Animated, StatusBar, DrawerLayoutAndroid} from 'react-native';
 import { CredCard, InfoCard, SettingsSlide, HomeScreenTopBar, HomeSideBar, HomePlusAnimatedView } from '../components/homeScreen.components';
-import SystemNavigationBar from 'react-native-system-navigation-bar';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { PieCharts } from '../components/charts.components';
@@ -15,7 +14,6 @@ export const Home = ()=>{
     const drawer = useRef(null)
 
     const navigation = useNavigation()
-    SystemNavigationBar.navigationHide();
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const sideBarWidth = useRef(new Animated.Value(0)).current;
 
@@ -88,7 +86,7 @@ export const Home = ()=>{
                 drawerPosition={drawerPosition}
                 renderNavigationView={navigationView}
             >
-                <View  style={styles.container}>
+            <View  style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
 
             <HomePlusAnimatedView />
@@ -98,7 +96,7 @@ export const Home = ()=>{
                 navigation.navigate('settings')
             }} />
             <HomeSideBar handleSideBarBack={hideSideBar} width={sideBarWidth} />
-            <SettingsSlide fadeAnim={fadeAnim}/>
+            {/* <SettingsSlide fadeAnim={fadeAnim}/> */}
             <InfoCard />
                 </View>
 

@@ -8,13 +8,13 @@ import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
 import {useNavigation} from '@react-navigation/native';
 import  SystemNavigationBar from 'react-native-system-navigation-bar';
 import { getFingerPrintEnabled } from '../storage/storage'
+import FingerPrintSvg from '../images/fingerprintSvg.svg'
 
 
 
 
 export const Login = ()=>{
 
-    SystemNavigationBar.navigationHide()
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
     const [email, setEmail] = useState('')
@@ -110,7 +110,7 @@ export const Login = ()=>{
             <StatusBar backgroundColor={'transparent'}/>
             <Logo />
 
-            <Text style={{fontSize: 30, color: 'black', textAlign: 'center', marginBottom: 60, fontWeight: '600'}}>
+            <Text style={{fontSize: 30, color: '#24A19C', textAlign: 'center', marginBottom: 60, fontWeight: '600'}}>
                 Login
             </Text>
 
@@ -150,29 +150,22 @@ export const Login = ()=>{
             <Text style={{color: '#24A19C', textAlign: 'center', marginTop: 20, textDecorationLine: 'underline'}}>
                 mot de passe oublier ?
             </Text>
-
-
                 {fingerPrint && fingerPrintEnabled &&
                 <TouchableOpacity onPress={()=>{
                     const rnBiometrics = new ReactNativeBiometrics({allowDeviceCredentials: true})
                     rnBiometrics.simplePrompt({promptMessage: 'Confirm fingerprint'})
                     .then((res)=>{
                         const { success } = res
-
                         if(success) {
                             navigation.navigate('home')
                         }else{
                             ToastAndroid.show('fingerprint incorrect', 200)
                         }
                     })
-
                 }} style={styles.icon}>
-                    <Image style={{height: '100%', width: '100%'}} source={require('../images/fingerprint.png')}/>
+                    <FingerPrintSvg height={75} width={75} fill='#24A19C' />
                 </TouchableOpacity>
                 }
-
-
-
         </View>
     )
 }

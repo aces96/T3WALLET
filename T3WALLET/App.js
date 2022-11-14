@@ -13,7 +13,6 @@ import store from './src/redux/store';
 
 import {
   Colors,
-
 } from 'react-native/Libraries/NewAppScreen';
 
 

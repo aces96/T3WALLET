@@ -13,7 +13,7 @@ export const Illustration = ()=>{
     const styles = StyleSheet.create({
         container: {
             width: '50%',
-            height: 300,
+            height: 230,
             alignSelf: 'center',
             marginTop: 20
         }
@@ -72,10 +72,10 @@ export const SupportText = ()=>{
         },
         submitButton: {
             width: '90%',
-            height: 65,
+            height: 55,
             alignSelf: 'center',
             position: 'absolute',
-            bottom: 20,
+            bottom: 40,
             backgroundColor: '#24A19C',
             borderRadius: 15,
             justifyContent: 'center',
@@ -83,8 +83,13 @@ export const SupportText = ()=>{
         }
     })
 
+
+
     return (
-        <View style={styles.container} >
+        <View style={styles.container}>
+            <Text style={{fontSize: 25, fontFamily: 'Roboto-Bold', color: '#24A19C', marginBottom: 20, textAlign: 'center'}}>
+                Contact support
+            </Text>
             <Text style={styles.text}>
             Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, 
             Le lorem ipsum est, en imprimerie, calibrer une mise en page, 

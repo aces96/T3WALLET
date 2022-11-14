@@ -41,7 +41,7 @@ export const InputView = ()=>{
         title: {
             fontSize: 25, 
             fontFamily: 'Oswald-Medium',
-            color: 'black',
+            color: '#24A19C',
             textAlign: 'center',
             marginBottom: 10
         },

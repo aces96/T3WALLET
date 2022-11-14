@@ -28,13 +28,13 @@ export const ProfilInfoCard = ()=>{
         backButtonView: {
             width: '100%',
             height: '50%',
-            backgroundColor: 'white',
+            backgroundColor: '#24A19C',
             justifyContent: 'flex-end'
         },
         text:{
             fontFamily: 'Roboto-Medium',
             fontSize: 28,
-            color: 'rgba(0,0,0,1)',
+            color: 'white',
             textAlign: 'center',
             marginBottom: 15
         },
@@ -81,7 +81,7 @@ export const ProfilInfoCard = ()=>{
                 <TouchableOpacity onPress={()=>{
                     navigation.goBack()
                 }}  style={styles.backButton}>
-                    <BackSvg width='100%' height='100%' fill= 'rgba(0,0,0,1)' />
+                    <BackSvg width='100%' height='100%' fill= 'white' />
                 </TouchableOpacity>
                 <Text style={styles.text}>
                     Profil
