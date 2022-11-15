@@ -40,14 +40,14 @@ export const InputView = ()=>{
         },
         title: {
             fontSize: 25, 
-            fontFamily: 'Oswald-Medium',
+            fontFamily: 'Roboto-Medium',
             color: '#24A19C',
             textAlign: 'center',
             marginBottom: 10
         },
         text:{
             fontSize: 16,
-            fontFamily: 'Oswald-Medium',
+            fontFamily: 'Roboto-Medium',
             color: 'rgba(0,0,0,0.4)',
             textAlign: 'center',
             marginBottom: 30
@@ -82,7 +82,7 @@ export const InputView = ()=>{
             </Text>
             
             <Text style={styles.text}>
-                We have sent a validation code to your email
+                lorem lorem lorem lorem lorem lorem
             </Text>
 
             <TextInput onChangeText={(e)=>setValidationCode(e)} style={styles.input} value={validationCode} placeholder='enter the validation code' placeholderTextColor= 'rgba(0,0,0,0.4)' />

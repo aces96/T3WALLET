@@ -157,7 +157,7 @@ export const Login = ()=>{
                     .then((res)=>{
                         const { success } = res
                         if(success) {
-                            navigation.navigate('home')
+                            navigation.navigate('onBoarding')
                         }else{
                             ToastAndroid.show('fingerprint incorrect', 200)
                         }

@@ -123,11 +123,11 @@ export const InfoCard = (props)=>{
             <View style={styles.itemView}>
                 <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
                     <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', justifyContent: 'center', borderBottomWidth: 2}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>PHYGITAL</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center'}}>PHYGITAL</Text>
                     </View>
 
                     <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>500</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center', fontSize: 17}}>500</Text>
                     </View>
                 </View>
 
@@ -135,11 +135,11 @@ export const InfoCard = (props)=>{
 
                 <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
                     <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', borderBottomWidth: 2, justifyContent: 'center'}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>DIGITAL</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center'}}>DIGITAL</Text>
                     </View>
 
                     <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
                     </View>
                 </View>
 
@@ -147,11 +147,11 @@ export const InfoCard = (props)=>{
 
                 <View style={{width: '30%', height: '100%', backgroundColor: '#24A19C', borderRadius: 20}}>
                     <View style={{width: '100%', height: '50%', borderTopLeftRadius: 20, borderTopRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2, borderColor: 'white', borderBottomWidth: 2, justifyContent: 'center'}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center'}}>BADGE</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center'}}>BADGE</Text>
                     </View>
 
                     <View style={{width: '100%', height: '50%', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderColor: 'white', justifyContent: 'center'}}>
-                        <Text style={{fontFamily: 'Oswald-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
+                        <Text style={{fontFamily: 'Roboto-Medium', color: 'white', textAlign:'center', fontSize: 17}}>250</Text>
                     </View>
                 </View>
             </View>
@@ -404,7 +404,7 @@ export const HomePlusAnimatedView = ()=>{
             justifyContent: 'center'
         },
         text: {
-            fontFamily: 'Oswald-Medium',
+            fontFamily: 'Roboto-Medium',
             color: 'white',
             textAlign: 'center',
             fontSize: 18

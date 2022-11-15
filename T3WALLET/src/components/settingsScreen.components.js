@@ -184,7 +184,7 @@ export const ResetPasswordCard = ()=>{
     return (
         <Animated.View style={{...styles.container, height: initialHeight}}>
 
-            <Text style={{fontFamily: 'Oswald-Medium', color: 'black', fontSize: 20, marginLeft: 15, marginTop: 10}}>
+            <Text style={{fontFamily: 'Roboto-Medium', color: 'black', fontSize: 20, marginLeft: 15, marginTop: 10}}>
                 Reset password
             </Text>
             <TouchableOpacity onPress={()=>{

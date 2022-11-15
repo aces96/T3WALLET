@@ -85,10 +85,10 @@ export const Card = ({key, title, navTab, link , handleClick, handleEdit}) => {
                 setHeight(100)
             }
         }} style={{...styles.item, height: fadeAnim, backgroundColor: 'rgba(36,161,156,0.1)'}}>
-            <Text style={{...styles.title, fontFamily: 'Oswald-Medium'}}>{title}</Text>
+            <Text style={{...styles.title, fontFamily: 'Roboto-Medium'}}>{title}</Text>
             <View style={{height: 45, flexDirection: 'row'}}>
-                <Text style={{...styles.title, fontFamily: 'Oswald-Regular'}}>credentiel link:</Text>
-                <Text onPress={()=>Linking.openURL(`${link}`)} style={{...styles.title, marginLeft: 15, color: '#24A19C', textDecorationLine: 'underline', fontFamily: 'Oswald-Regular'}}>Open credentiel</Text>
+                <Text style={{...styles.title, fontFamily: 'Roboto-Regular'}}>credentiel link:</Text>
+                <Text onPress={()=>Linking.openURL(`${link}`)} style={{...styles.title, marginLeft: 15, color: '#24A19C', textDecorationLine: 'underline', fontFamily: 'Roboto-Regular'}}>Open credentiel</Text>
             </View>
             {Height == 100 &&
               <TouchableOpacity onPress={()=>{
@@ -325,7 +325,7 @@ export const CardMoreModal = (props)=>{
     },
     text: {
       fontSize: 20,
-      fontFamily: 'Oswald-Medium',
+      fontFamily: 'Roboto-Medium',
       color: '#24A19C',
       position: 'absolute',
       top: 13,

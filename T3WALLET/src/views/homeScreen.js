@@ -11,7 +11,7 @@ import { PieCharts } from '../components/charts.components';
 
 export const Home = ()=>{
 
-    const drawer = useRef(null)
+    // const drawer = useRef(null)
 
     const navigation = useNavigation()
     const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -80,12 +80,12 @@ export const Home = ()=>{
       );
 
       return (
-            <DrawerLayoutAndroid
-                ref={drawer}
-                drawerWidth={250}
-                drawerPosition={drawerPosition}
-                renderNavigationView={navigationView}
-            >
+            // <DrawerLayoutAndroid
+            //     ref={drawer}
+            //     drawerWidth={250}
+            //     drawerPosition={drawerPosition}
+            //     renderNavigationView={navigationView}
+            // >
             <View  style={styles.container}>
             <StatusBar backgroundColor={'transparent'}/>
 
@@ -100,6 +100,6 @@ export const Home = ()=>{
             <InfoCard />
                 </View>
 
-            </DrawerLayoutAndroid>
+            // </DrawerLayoutAndroid>
     )
 }

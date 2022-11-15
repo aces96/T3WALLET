@@ -16,7 +16,7 @@ export const PieCharts = ()=>{
     const styles = StyleSheet.create({
         container: {
             width: '100%',
-            height: '50%',
+            height: '70%',
             justifyContent: 'center',
             alignItems: 'center'
         }
@@ -57,7 +57,7 @@ export const PieCharts = ()=>{
 
     return (
         <View style={styles.container}>
-            <PieChart  absolute paddingLeft='18'   center={[5, -10]}data={data} width={Dimensions.get('screen').width} height={230}  accessor={"total"}  chartConfig={chartConfig} style={{width: '100%', height: '80%'}}/>
+            <PieChart  absolute paddingLeft='18'center={[0, -10]}data={data} width={Dimensions.get('screen').width} height={270}  accessor={"total"}  chartConfig={chartConfig} style={{width: '100%', height: '100%'}}/>
         </View>
     )
 }
@@ -185,13 +185,13 @@ export const Chart = ()=>{
             <View style={styles.buttonsView}>
                 <TouchableOpacity onPress={()=>{
                     setStep(1)
-                }} style={{width: '35%', height: '100%', borderBottomWidth: 1, borderRadius: 20, justifyContent: 'center', alignItems: 'center', borderColor: step == 1 ? '#24A19C' : 'black'}}>
+                }} style={{width: '35%', height: '100%', borderBottomWidth: 2, borderRadius: 20, justifyContent: 'center', alignItems: 'center', borderColor: step == 1 ? '#24A19C' : 'black'}}>
                     <Text style={{fontSize: 15, color: step == 1 ? '#24A19C' : 'black'}}>SHARES</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
                     setStep(2)
-                }} style={{width: '35%', height: '100%', borderBottomWidth: 1, borderRadius: 20, justifyContent: 'center', alignItems: 'center', borderColor: step == 2 ? '#24A19C' : 'black'}}>
+                }} style={{width: '35%', height: '100%', borderBottomWidth: 2, borderRadius: 20, justifyContent: 'center', alignItems: 'center', borderColor: step == 2 ? '#24A19C' : 'black'}}>
                     <Text style={{fontSize: 15, color: step == 2 ? '#24A19C' : 'black'}}>CREDENTIELS</Text>
                 </TouchableOpacity>
             </View>

@@ -131,21 +131,21 @@ export const DataTable = ()=>{
                     dispatch(updateType('phygital'))
                     setSearchedCred([])
                 }} style={{width: '30%', height: '100%', borderBottomWidth: navTab == 'phygital' ? 5: 2, justifyContent: 'center', alignItems: 'center', borderColor: navTab == 'phygital' ? '#24A19C' : 'black'}}>
-                    <Text style={{fontSize: 15, color: navTab == 'phygital' ? '#24A19C': 'black', fontWeight: '600',fontFamily: 'Oswald-Bold'}}>Phygital</Text>
+                    <Text style={{fontSize: 15, color: navTab == 'phygital' ? '#24A19C': 'black', fontWeight: '600',fontFamily: 'Roboto-Bold'}}>Phygital</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
                     dispatch(updateType('digital'))
                     setSearchedCred([])
                 }} style={{width: '30%', height: '100%', borderBottomWidth: navTab == 'digital' ? 5: 2, justifyContent: 'center', alignItems: 'center', borderColor: navTab == 'digital' ? '#24A19C' : 'black'}}>
-                    <Text style={{fontSize: 15, color: navTab == 'digital'? '#24A19C': 'black' , fontWeight: '600', fontFamily: 'Oswald-Bold'}}>Digital</Text>
+                    <Text style={{fontSize: 15, color: navTab == 'digital'? '#24A19C': 'black' , fontWeight: '600', fontFamily: 'Roboto-Bold'}}>Digital</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
                     dispatch(updateType('badge'))
                     setSearchedCred([])
                 }} style={{width: '30%', height: '100%', borderBottomWidth: navTab == 'badge' ? 5: 2, justifyContent: 'center', alignItems: 'center', borderColor: navTab == 'badge' ? '#24A19C' : 'black'}}>
-                    <Text style={{fontSize: 15, color: navTab == 'badge' ? '#24A19C': 'black', fontWeight: '600', fontFamily: 'Oswald-Bold'}}>Badge</Text>
+                    <Text style={{fontSize: 15, color: navTab == 'badge' ? '#24A19C': 'black', fontWeight: '600', fontFamily: 'Roboto-Bold'}}>Badge</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.searchView}>
@@ -161,7 +161,7 @@ export const DataTable = ()=>{
                 renderItem={({item: lst}) => navTab == 'phygital'? <PhygitalItem handleEdit={handleEdit}  handleClick={handleClick}  title={lst.fullName} link={lst.CredentielLink} key={lst.id} navTab={navTab} />: navTab == 'digital'? <DigitalItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/> : <BadgeItem key={lst.id}  handleEdit={handleEdit} handleClick={handleClick} title={lst.fullName} link={lst.CredentielLink} navTab={navTab}/>}
                 />
                 : <ActivityIndicator size={50} animating={active} style={{alignSelf: 'center', marginTop: 80}}/>}
-            <PlusSettings />
+            {/* <PlusSettings /> */}
             {viewImage &&
                 <ImageView handleCancel={handleCancel} />
             }

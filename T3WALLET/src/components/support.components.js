@@ -13,7 +13,7 @@ export const Illustration = ()=>{
     const styles = StyleSheet.create({
         container: {
             width: '50%',
-            height: 230,
+            height: 200,
             alignSelf: 'center',
             marginTop: 20
         }
@@ -41,7 +41,7 @@ export const SupportText = ()=>{
         text: {
             fontSize: 15,
             fontFamily: 'Roboto-Medium',
-            color: 'black',
+            color: 'rgba(0,0,0,0.5)',
             textAlign: 'center',
             marginBottom: 40
         },

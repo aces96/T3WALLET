@@ -11,6 +11,7 @@ import { Settings } from '../views/settings';
 import { ResetPassword } from '../views/resetPassword';
 import { Support } from '../views/support';
 import { Charts } from '../views/charts';
+import { OnBoarding } from '../views/onBoarding';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export const Navigation = ()=>{
                 <Stack.Screen name='resetPassword' component={ResetPassword}/>
                 <Stack.Screen name='support' component={Support}/>
                 <Stack.Screen name='charts' component={Charts}/>
+                <Stack.Screen name='onBoarding' component={OnBoarding}/>
             </Stack.Navigator>
         </NavigationContainer>
 
