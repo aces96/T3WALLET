@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet , TouchableOpacity, Image, ToastAndroid} from 'react-native';
-import { useState , useRef} from 'react';
+import { useState , useRef, useCallback} from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import RNFS from "react-native-fs"
@@ -8,6 +8,7 @@ import SaveSvg from '../images/saveSvg'
 import { useNavigation } from '@react-navigation/native';
 import ShareSvg from '../images/shareSvg2'
 import  Share  from 'react-native-share';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -40,14 +41,23 @@ export const QrcodeView = ()=>{
     })
 
 
+    useFocusEffect(
+        useCallback(()=>{
+            getDataURL()
+        },[])
+    )
+
+
+    const getDataURL = () =>  {
+        ref.current.toDataURL((res)=>{
+            setBase64(res)
+        });
+    }
+
+
     const shareQrcode =   async ()=>{
 
-        console.log('reeeeeeeeeeef', ref.current);
-        try {
-            await ref.current.toDataURL((data)=>{
-                setBase64(data)
-            })
-            
+        try {            
             const options = {
                 title: 'Qrcode image',
                 url: `data:image/png;base64,${base64}`
@@ -63,7 +73,7 @@ export const QrcodeView = ()=>{
     }
 
 
-        const saveQrToDisk = () => {
+    const saveQrToDisk = () => {
             qrCodeSvg.toDataURL((data) => {
                 console.log('daaaaaata', data);
               RNFS.writeFile(RNFS.CachesDirectoryPath+"/some-name.png", data, 'base64')
@@ -75,7 +85,7 @@ export const QrcodeView = ()=>{
                   ToastAndroid.show('Saved to gallery !!', ToastAndroid.SHORT)
                 })
             })
-        }
+    }
 
 
 

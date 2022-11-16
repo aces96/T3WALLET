@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions, ToastAndroid} from 'react-native'
+import {StyleSheet, View, Text, Animated, TouchableOpacity,Image, Linking, Dimensions, Share} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 
@@ -345,7 +345,13 @@ export const CardMoreModal = (props)=>{
       </TouchableOpacity>
 
       <View style={styles.modal}>
-        <TouchableOpacity style={styles.buttons}>
+        <TouchableOpacity onPress={()=>{
+            Share.share({
+              message: `congrats  
+                this is your creentiels link
+              `
+            })
+        }} style={styles.buttons}>
           <View style={{width: 30, height: 30, position: 'absolute', right: 10, top: 20}}>
             <ShareSvg height='100%' width= '100%' fill='#24A19C'/>
           </View>

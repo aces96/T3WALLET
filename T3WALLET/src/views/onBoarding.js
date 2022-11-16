@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import { View, StyleSheet, Animated,Text, TouchableOpacity, StatusBar } from 'react-native';
 import CertifIllustration from '../images/certifIllustration.svg'
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import Logo from '../images/logo/logo.svg'
 
 
@@ -36,9 +37,16 @@ export const OnBoarding = ()=>{
         }).start()
     }
 
+
+
     useFocusEffect(
         useCallback(()=>{
             slideDown()
+
+
+            return ()=>{
+                setSlideIsUp(false)
+            }
         },[])
     )
 
@@ -70,35 +78,39 @@ export const OnBoarding = ()=>{
         }
     })
 
+
     return (
         <View style={styles.container} >
             <StatusBar backgroundColor={'transparent'} />
-            <Animated.View style={{width: '100%', height: SlideHeight, backgroundColor: 'rgba(36,161,156,0.8)', borderBottomLeftRadius: 60, borderBottomRightRadius: 60, position: 'absolute', zIndex: 10}}>
-                    <Text style={{fontFamily: 'Roboto-Medium', color: 'white', fontSize: 25, textAlign: 'center', margin: 100}}>Lorem ipsum</Text>
+                <Animated.View style={{width: '100%', height: SlideHeight, backgroundColor: 'rgba(36,161,156,1)', borderBottomLeftRadius: 60, borderBottomRightRadius: 60, position: 'absolute', zIndex: 10}}>
+                        <Text style={{fontFamily: 'Roboto-Bold', color: 'white', fontSize: 30, textAlign: 'center', marginTop: 100}}>Lorem ipsum</Text>
 
-                    <View style={{width: '100%', height: 300, position: 'absolute', bottom: 350, alignSelf: 'center', alignItems: 'center', paddingLeft: 15, paddingRight: 15, justifyContent: 'space-around'}}>
-                        <CertifIllustration style={{marginBottom: 80}}  width={250} height={250}/> 
-                        <Text style={{fontFamily: 'Roboto-Medium', fontSize: 16, textAlign: 'center', color: 'white'}}>
-                            Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, 
-                        </Text>
-                    </View>
+                        <View style={{width: '100%', height: 360, position: 'absolute', bottom: 280, alignSelf: 'center', alignItems: 'center', paddingLeft: 15, paddingRight: 15, justifyContent: 'space-around'}}>
+                            <CertifIllustration  width={250} height={250}/> 
+                            <Text style={{fontFamily: 'Roboto-Medium', fontSize: 16, textAlign: 'center', color: 'white'}}>
+                                Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, 
+                            </Text>
+                        </View>
 
-                    <TouchableOpacity onPress={()=>{
-                        setSlideIsUp(true)
-                        slideUp()
-                        setTimeout(()=>{
-                            navigation.navigate('home')
-                        }, 1000)
-                    }} style={styles.button}>
-                        <Text style={{fontSize: 20, fontFamily: 'Roboto-Medium', color: 'white'}}>
-                            Continuer
-                        </Text>
-                    </TouchableOpacity>
-            </Animated.View>
+                        <TouchableOpacity onPress={()=>{
+                            setSlideIsUp(true)
+                            slideUp()
+                            setTimeout(()=>{
+                                navigation.navigate('home')
+                            }, 1000)
+                        }} style={styles.button}>
+                            <Text style={{fontSize: 22, fontFamily: 'Roboto-Medium', color: 'white', }}>
+                                Continuer
+                            </Text>
+                        </TouchableOpacity>
+                </Animated.View>
+
 
             {SlideIsUp && 
-                <Logo style={{alignSelf: 'center', marginTop: 250, height: 150, width: 150}}/>
+                <Logo style={{alignSelf: 'center', top: 250, height: 150, width: 150, position: 'absolute', zIndex: 5}}/>
             }
+
+
         </View>
     )
 }

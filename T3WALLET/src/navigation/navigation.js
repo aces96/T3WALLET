@@ -36,6 +36,5 @@ export const Navigation = ()=>{
                 <Stack.Screen name='onBoarding' component={OnBoarding}/>
             </Stack.Navigator>
         </NavigationContainer>
-
     )
 }

@@ -128,7 +128,7 @@ export const Login = ()=>{
 
             <View style={styles.rememberMe}>
 
-                <Text style={{color: 'black', position: 'absolute', right: 70}}>
+                <Text style={{color: 'black',position: 'absolute', right: 70}}>
                     Souviens de moi
                 </Text>
 
